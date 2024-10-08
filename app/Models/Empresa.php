@@ -12,7 +12,7 @@ class Empresa extends Model
     // Permite a atribuição em massa dos campos abaixo
     protected $fillable = ['nome', 'cnpj', 'endereco', 'telefone', 'email', 'holding_id'];
 
-    // Relacionamento Muitos-para-Um: Cada Empresa pertence a uma Holding
+
     public function holding()
     {
         return $this->belongsTo(Holding::class);
@@ -31,5 +31,10 @@ class Empresa extends Model
     public function balancetes()
     {
         return $this->hasMany(Balancetes::class);
+    }
+
+    public function usuarios()
+    {
+        return $this->hasMany(User::class);
     }
 }

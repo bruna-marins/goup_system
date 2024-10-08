@@ -35,18 +35,25 @@
                             <div class="brand-logo text-center">
                                 <img src="{{ asset('imagens/logo.png') }}" alt="Logo da Empresa">
                             </div>
-                            <form class="pt-3">
+
+                            <x-alert />
+
+                            <form action="{{ route('login.process') }}" method="POST" class="pt-3">
+
+                                @csrf
+                                @method('POST')
+
                                 <div class="form-group">
                                     <input type="email" class="form-control form-control-lg" id="email"
-                                        name="email" placeholder="E-mail">
+                                        name="email" placeholder="E-mail" value="{{ old('email') }}">
                                 </div>
                                 <div class="form-group">
                                     <input type="password" class="form-control form-control-lg" id="password"
                                         name="password" placeholder="Senha">
                                 </div>
                                 <div class="mt-3 d-grid gap-2">
-                                    <a class="btn btn-block btn-primary btn-lg fw-medium auth-form-btn"
-                                        href="#">Entrar</a>
+                                    <button class="btn btn-block btn-primary btn-lg fw-medium auth-form-btn"
+                                        type="submit">Entrar</button>
                                 </div>
                                 <div class="my-2 d-flex justify-content-between align-items-center">
                                     <div class="form-check">

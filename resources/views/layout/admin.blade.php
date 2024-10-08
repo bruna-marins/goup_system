@@ -56,10 +56,8 @@
                                 <i class="typcn fa-regular fa-cog-outline text-primary"></i>
                                 Settings
                             </a>
-                            <a class="dropdown-item">
-                                <i class="typcn fa-regular fa-eject text-primary"></i>
-                                Logout
-                            </a>
+                            <a class="dropdown-item" href="{{ route('login.destroy') }}"><i
+                                    class="fa-solid fa-arrow-right-from-bracket"></i> Sair</a>
                         </div>
                     </li>
                     <li class="nav-item nav-user-status dropdown">
