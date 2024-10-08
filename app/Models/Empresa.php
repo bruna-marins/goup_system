@@ -17,4 +17,19 @@ class Empresa extends Model
     {
         return $this->belongsTo(Holding::class);
     }
+
+    public function contasContabeis()
+    {
+        return $this->hasMany(ContasContabeis::class);
+    }
+
+    public function lancamentosContabeis()
+    {
+        return $this->hasMany(LancamentosContabeis::class);
+    }
+
+    public function balancetes()
+    {
+        return $this->hasMany(Balancetes::class);
+    }
 }
