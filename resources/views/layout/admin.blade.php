@@ -48,7 +48,11 @@
                     <li class="nav-item nav-profile dropdown">
                         <a class="nav-link" href="#" data-bs-toggle="dropdown" id="profileDropdown">
                             <img src="{{ asset('imagens/faces/face1.jpg') }}" alt="nome da pessoa">
-                            <span class="nav-profile-name">Teo Mendes</span>
+                            <span class="nav-profile-name">
+                                @if (auth()->check())
+                                    {{ auth()->user()->name }}
+                                @endif
+                            </span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
                             aria-labelledby="profileDropdown">
@@ -61,13 +65,17 @@
                         </div>
                     </li>
                     <li class="nav-item nav-user-status dropdown">
-                        <p class="mb-0">| O último login foi há 23 horas.</p>
+                        @if (Auth::user()->last_login_at)
+                            <p>Último login: {{ Auth::user()->last_login_at->diffForHumans() }}</p>
+                        @else
+                            <p>Você ainda não fez login anteriormente.</p>
+                        @endif
                     </li>
                 </ul>
                 <ul class="navbar-nav navbar-nav-right">
                     <li class="nav-item nav-date dropdown">
                         <a class="nav-link d-flex justify-content-center align-items-center" href="javascript:;">
-                            <h6 class="date mb-0">Hoje : Outubro 01</h6>
+                            <h6 class="date mb-0">Hoje : {{ now()->format('d/m/Y') }}</h6>
                             <i class="typcn "></i> <i class="fa-regular fa-calendar-days"></i>
                         </a>
                     </li>

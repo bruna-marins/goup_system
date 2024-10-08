@@ -9,12 +9,16 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    public function index(){
+    public function index()
+    {
 
         return view('login.index');
     }
 
-    public function loginProcess(LoginRequest $request){
+
+
+    public function loginProcess(LoginRequest $request)
+    {
 
         // Validar o formulário
         $request->validated();
@@ -23,7 +27,7 @@ class LoginController extends Controller
         $autenticado = Auth::attempt(['email' => $request->email, 'password' => $request->password]);
 
         // Verifeicar se o usuário foi autenticado
-        if(!$autenticado){
+        if (!$autenticado) {
             // Redirecionar para página de login com mensagem de erro
             return back()->withInput()->with('error', 'E-mail ou senha inválido!');
         }
@@ -32,7 +36,8 @@ class LoginController extends Controller
         return redirect()->route('holding.index');
     }
 
-    public function destroy(){
+    public function destroy()
+    {
 
         // Deslogar o usuário
         Auth::logout();
@@ -40,4 +45,5 @@ class LoginController extends Controller
         // Redirecionar o usuário e enviar mensagem de sucesso
         return redirect()->route('login.index')->with('success', 'Deslogado com sucesso!');
     }
+
 }
