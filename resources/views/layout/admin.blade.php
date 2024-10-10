@@ -139,7 +139,7 @@
         <nav class="navbar-breadcrumb col-xl-12 col-12 d-flex flex-row p-0">
             <div class="navbar-links-wrapper d-flex align-items-stretch">
                 <div class="nav-link">
-                    <a href="javascript:;"><i class="fa-regular fa-calendar-days mx-0"></i></a>
+                    <a href="{{ route('tarefa.index') }}" title="Agenda"><i class="fa-regular fa-calendar-days mx-0"></i></a>
                 </div>
                 <div class="nav-link">
                     <a href="javascript:;"><i class="fa-regular fa-envelope-days mx-0"></i></a>
@@ -191,6 +191,24 @@
                             <div class="badge badge-danger">new</div>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false"
+                            aria-controls="auth">
+                            <i class="fa-regular fa-user espaco menu-icon" style="color:#FF914D;"></i>
+                            <span class="menu-title">Usuários</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="auth">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="{{ route('usuario.index') }}">
+                                        Usuários </a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{{ route('usuario.create') }}">
+                                        Cadastrar Usuário </a></li>
+                            </ul>
+                        </div>
+                    </li>
+
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
                             aria-controls="ui-basic">
@@ -209,6 +227,7 @@
                             </ul>
                         </div>
                     </li>
+                    <!--
 
                     <li class="nav-item">
                         <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false"
@@ -232,6 +251,7 @@
                             </ul>
                         </div>
                     </li>
+                    -->
                     <li class="nav-item">
                         <a class="nav-link" href="../../../docs/documentation.html">
                             <i class="fa-regular fa-file espaco menu-icon" style="color:#FF914D;"></i>

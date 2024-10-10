@@ -4,6 +4,7 @@ use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\EmpresaPerfilController;
 use App\Http\Controllers\HoldingController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\TarefaController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
@@ -56,4 +57,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/edit-profile-logo', [EmpresaPerfilController::class, 'editLogo'])->name('empresa_profile.edit-logo');
     Route::put('/update-profile-logo', [EmpresaPerfilController::class, 'updateLogo'])->name('empresa_profile.update-logo');
     Route::get('/show-colaboradores-empresa', [EmpresaPerfilController::class, 'colaboradores'])->name('empresa_profile.colaboradores');
+
+    // Agenda
+    Route::get('/agenda', [TarefaController::class, 'index'])->name('tarefa.index');
+    Route::get('/agenda/create/{data}', [TarefaController::class, 'create'])->name('tarefa.create');
+    Route::post('/agenda/tarefa', [TarefaController::class, 'store'])->name('tarefa.store');
+    Route::get('/agenda/tarefas/{data}', [TarefaController::class, 'showTarefas'])->name('tarefa.show');
 });
