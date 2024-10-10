@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\EmpresaPerfilController;
 use App\Http\Controllers\HoldingController;
@@ -7,7 +8,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TarefaController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
-
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 // Login
 Route::get('/', [LoginController::class, 'index'])->name('login.index');
@@ -15,7 +16,11 @@ Route::post('/login', [LoginController::class, 'loginProcess'])->name('login.pro
 Route::get('/logout', [LoginController::class, 'destroy'])->name('login.destroy');
 
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'auth:web,holding'], function () {
+
+
+    // Dashboard
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard.dashboard');
 
 
     // Holdings
@@ -63,4 +68,5 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/agenda/create/{data}', [TarefaController::class, 'create'])->name('tarefa.create');
     Route::post('/agenda/tarefa', [TarefaController::class, 'store'])->name('tarefa.store');
     Route::get('/agenda/tarefas/{data}', [TarefaController::class, 'showTarefas'])->name('tarefa.show');
+    Route::get('/agenda/ajax', [TarefaController::class, 'calendar'])->name('tarefa.calendar');
 });

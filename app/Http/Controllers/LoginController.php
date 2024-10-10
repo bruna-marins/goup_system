@@ -23,27 +23,37 @@ class LoginController extends Controller
         // Validar o formulário
         $request->validated();
 
-        // Validar o usuário e a senha com as informações do  banco de dados
-        $autenticado = Auth::attempt(['email' => $request->email, 'password' => $request->password]);
-
-        // Verifeicar se o usuário foi autenticado
-        if (!$autenticado) {
-            // Redirecionar para página de login com mensagem de erro
-            return back()->withInput()->with('error', 'E-mail ou senha inválido!');
+        // Primeira tentativa: tentar autenticar o usuário da tabela 'users'
+        if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+            // Se o login for bem-sucedido, redireciona para o dashboard do usuário
+            return redirect()->route('empresa.index');
         }
 
-        // Redirecionar o usuário
-        return redirect()->route('holding.index');
+        // Segunda tentativa: tentar autenticar o usuário da tabela 'holding_users'
+        if (Auth::guard('holding')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+            // Se o login for bem-sucedido, redireciona para o dashboard da holding
+            return redirect()->route('holding.index');
+        }
+
+        // Se ambas as tentativas falharem, redireciona de volta com erro
+        return redirect()->back()->withInput($request->only('email', 'remember'))
+            ->withErrors(['email' => 'As credenciais fornecidas não correspondem aos nossos registros.']);
+
     }
 
-    public function destroy()
+    public function destroy(Request $request)
     {
 
-        // Deslogar o usuário
-        Auth::logout();
+        if (Auth::guard('web')->check()) {
+            Auth::guard('web')->logout();
+        } elseif (Auth::guard('holding')->check()) {
+            Auth::guard('holding')->logout();
+        }
 
-        // Redirecionar o usuário e enviar mensagem de sucesso
-        return redirect()->route('login.index')->with('success', 'Deslogado com sucesso!');
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/')->with('success', 'Deslogado com sucesso!');
     }
 
 }

@@ -36,9 +36,16 @@ return [
     */
 
     'guards' => [
+        // Guard padrão para usuários
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
+        ],
+
+        // Guard para holding_users
+        'holding' => [
+            'driver' => 'session',
+            'provider' => 'holding_users',
         ],
     ],
 
@@ -65,10 +72,11 @@ return [
             'model' => env('AUTH_MODEL', App\Models\User::class),
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        // Provedor para holding_users
+        'holding_users' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL', App\Models\HoldingUser::class),
+        ],
     ],
 
     /*

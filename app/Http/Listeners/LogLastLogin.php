@@ -10,8 +10,16 @@ class LogLastLogin
 {
     public function handle(Login $event)
     {
-        // Atualiza o campo last_login_at com a data e hora atuais
-        $event->user->last_login_at = now();
-        $event->user->save();
+        // Verifica se o usuário logado é da tabela 'users'
+        if ($event->guard === 'web') {
+            $event->user->last_login_at = now();
+            $event->user->save();
+        }
+
+        // Verifica se o usuário logado é da tabela 'holding_users'
+        if ($event->guard === 'holding') {
+            $event->user->last_login_at = now();
+            $event->user->save();
+        }
     }
 }

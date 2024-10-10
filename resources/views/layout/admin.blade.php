@@ -33,9 +33,9 @@
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="navbar-brand-wrapper d-flex justify-content-center">
                 <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
-                    <a class="navbar-brand brand-logo" href="#"><img src="{{ asset('imagens/logo.svg') }}"
+                    <a class="navbar-brand brand-logo" href="{{ route('holding.index') }}"><img src="{{ asset('imagens/logo.svg') }}"
                             alt="Logo da Empresa"></a>
-                    <a class="navbar-brand brand-logo-mini" href="#"><img
+                    <a class="navbar-brand brand-logo-mini" href="{{ route('holding.index') }}"><img
                             src="{{ asset('imagens/logo-mini.svg') }}" alt="Logo da Empresa"></a>
                     <button class="navbar-toggler navbar-toggler align-self-center" type="button"
                         data-toggle="minimize">
@@ -185,7 +185,7 @@
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="../../index.html">
+                        <a class="nav-link" href="{{ route('dashboard.dashboard') }}">
                             <i class="fa-solid fa-chart-line espaco menu-icon" style="color:#FF914D;"></i>
                             <span class="menu-title">Dashboard</span>
                             <div class="badge badge-danger">new</div>
@@ -322,6 +322,10 @@
 
     <script src="{{ asset('js/dashboard.js') }}"></script>
     <!-- End custom js for this page-->
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    @yield('scripts') <!-- Incluir scripts específicos da página -->
 
 </body>
 
