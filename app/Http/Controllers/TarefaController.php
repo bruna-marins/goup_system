@@ -24,7 +24,7 @@ class TarefaController extends Controller
             ->toArray();
 
         // Renderizar a view completa (incluindo layout) com o calendário do mês selecionado
-        return view('tarefa.index', [
+        return view('empresas.tarefa.index', [
             'tarefasPorData' => $tarefasPorData,
             'mesSelecionado' => $mesSelecionado,
             'mesAnterior' => $mesSelecionado->copy()->subMonth(),
@@ -48,7 +48,7 @@ class TarefaController extends Controller
             ->toArray();
 
         // Retorna o conteúdo do calendário como uma view parcial
-        return view('tarefa.calendar', [
+        return view('empresas.tarefa.calendar', [
             'tarefasPorData' => $tarefasPorData,
             'mesSelecionado' => $mesSelecionado,
             'mesAnterior' => $mesSelecionado->copy()->subMonth(),
@@ -61,7 +61,7 @@ class TarefaController extends Controller
         // Buscar todas as tarefas para um dia específico
         $tarefas = Tarefa::where('data', $data)->get();
 
-        return view('tarefa.create', compact('tarefas', 'data'));
+        return view('empresas.tarefa.create', compact('tarefas', 'data'));
     }
 
     public function store(Request $request)
@@ -77,7 +77,7 @@ class TarefaController extends Controller
         // Cria a tarefa
         Tarefa::create($request->all());
 
-        return redirect()->route('tarefa.index')->with('success', 'Tarefa adicionada com sucesso!');
+        return redirect()->route('empresas.tarefa.index')->with('success', 'Tarefa adicionada com sucesso!');
     }
 
     public function showTarefas($data)
@@ -85,6 +85,6 @@ class TarefaController extends Controller
         // Buscar todas as tarefas para um dia específico
         $tarefas = Tarefa::where('data', $data)->get();
 
-        return view('tarefa.show', compact('tarefas', 'data'));
+        return view('empresas.tarefa.show', compact('tarefas', 'data'));
     }
 }

@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('holdings.layout.admin')
 
 @section('content')
     
@@ -15,7 +15,7 @@
                     <!-- alerta -->
                 
 
-                <form class="forms-sample" action="{{ route('holding.store') }}" method="POST">
+                <form class="forms-sample" action="{{ route('holdings.holding.store') }}" method="POST">
                     @csrf
                     @method('POST')
 

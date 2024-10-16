@@ -10,7 +10,7 @@
         <!-- botao -->
         <div class="ms-md-auto py-2 py-md-0">
             <div class="btn-group" role="group" aria-label="Basic example">
-                <a href="{{ route('usuario.index') }}" class="btn btn btn-secondary btn-sm" title="Listar Usuários">
+                <a href="{{ route('empresas.usuario.index') }}" class="btn btn btn-secondary btn-sm" title="Listar Usuários">
                     <i class="fa-solid fa-list"></i>
                 </a>
             </div>
@@ -26,7 +26,7 @@
             <div class="col col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ route('usuario.store') }}" method="POST">
+                        <form action="{{ route('empresas.usuario.store') }}" method="POST">
                             @csrf
                             @method('POST')
                     

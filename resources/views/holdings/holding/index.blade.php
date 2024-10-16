@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('holdings.layout.admin')
 
 @section('content')
 
@@ -10,7 +10,7 @@
                 <div class="col-12">
                     <div class="d-flex flex-column flex-md-row justify-content-between align-items-center py-2">
                         <h1 class="card-title mb-2 mb-md-0">Lista de Holdings</h1>
-                        <a href="{{ route('holding.create') }}" class="btn btn-inverse-info btn-sm"title="Cadastrar Nova Holding">
+                        <a href="{{ route('holdings.holding.create') }}" class="btn btn-inverse-info btn-sm"title="Cadastrar Nova Holding">
                             <i class="fa-solid fa-plus btn-icon-prepend"></i>
                             Nova Holding
                         </a>
@@ -45,10 +45,10 @@
                                         <td>{{ $holding->telefone }}</td>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <a href="{{ route('holding.edit', $holding->id) }}" class="btn btn-inverse-info btn-sm btn-icon-text me-3" title="Editar Holding">
+                                                <a href="{{ route('holdings.holding.edit', $holding->id) }}" class="btn btn-inverse-info btn-sm btn-icon-text me-3" title="Editar Holding">
                                                     <i class="fa-solid fa-edit btn-icon-append"></i>                          
                                                 </a>
-                                                <a href="{{ route('holding.show', $holding->id) }}" class="btn btn-inverse-info btn-sm btn-icon-text  me-3" title="Detalhes">
+                                                <a href="{{ route('holdings.holding.show', $holding->id) }}" class="btn btn-inverse-info btn-sm btn-icon-text  me-3" title="Detalhes">
                                                     <i class="fa-regular fa-eye"></i>
                                                 </a>
                                             </div>

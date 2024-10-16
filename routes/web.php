@@ -19,54 +19,59 @@ Route::get('/logout', [LoginController::class, 'destroy'])->name('login.destroy'
 Route::group(['middleware' => 'auth:web,holding'], function () {
 
 
-    // Dashboard
-    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard.dashboard');
+    // Rotas paras as Holdings
 
+    // Dashboard
+    Route::get('/holdings/dashboard', [DashboardController::class, 'holdingDashboard'])->name('holdings.dashboard.dashboard');
 
     // Holdings
-    Route::get('/index-holding', [HoldingController::class, 'index'])->name('holding.index');
-    Route::get('/show-holding/{holding}', [HoldingController::class, 'show'])->name('holding.show');
-    Route::get('/create-holding', [HoldingController::class, 'create'])->name('holding.create');
-    Route::post('/store-holding', [HoldingController::class, 'store'])->name('holding.store');
-    Route::get('/edit-holding/{holding}', [HoldingController::class, 'edit'])->name('holding.edit');
-    Route::put('/update-holding/{holding}', [HoldingController::class, 'update'])->name('holding.update');
-    Route::delete('/destroy-holding/{holding}', [HoldingController::class, 'destroy'])->name('holding.destroy');
+    Route::get('/holdings/index-holding', [HoldingController::class, 'index'])->name('holdings.holding.index');
+    Route::get('/holdings/show-holding/{holding}', [HoldingController::class, 'show'])->name('holdings.holding.show');
+    Route::get('/holdings/create-holding', [HoldingController::class, 'create'])->name('holdings.holding.create');
+    Route::post('/holdings/store-holding', [HoldingController::class, 'store'])->name('holdings.holding.store');
+    Route::get('/holdings/edit-holding/{holding}', [HoldingController::class, 'edit'])->name('holdings.holding.edit');
+    Route::put('/holdings/update-holding/{holding}', [HoldingController::class, 'update'])->name('holdings.holding.update');
+    Route::delete('/holdings/destroy-holding/{holding}', [HoldingController::class, 'destroy'])->name('holdings.holding.destroy');
 
+
+
+    // Rotas para as Empresas
+
+    // Dashboard
+    Route::get('/empresas/dashboard', [DashboardController::class, 'empresaDashboard'])->name('empresas.dashboard.dashboard');
 
     // Empresas
-    Route::get('/index-empresa', [EmpresaController::class, 'index'])->name('empresa.index');
-    Route::get('/show-empresa/{empresa}', [EmpresaController::class, 'show'])->name('empresa.show');
-    Route::get('/create-empresa', [EmpresaController::class, 'create'])->name('empresa.create');
-    Route::post('/store-empresa', [EmpresaController::class, 'store'])->name('empresa.store');
-    Route::get('/edit-empresa/{empresa}', [EmpresaController::class, 'edit'])->name('empresa.edit');
-    Route::put('/update-empresa/{empresa}', [EmpresaController::class, 'update'])->name('empresa.update');
-    Route::delete('/destroy-empresa/{empresa}', [EmpresaController::class, 'destroy'])->name('empresa.destroy');
-
+    Route::get('/empresas/index-empresa', [EmpresaController::class, 'index'])->name('empresas.empresa.index');
+    Route::get('/empresas/show-empresa/{empresa}', [EmpresaController::class, 'show'])->name('empresas.empresa.show');
+    Route::get('/empresas/create-empresa', [EmpresaController::class, 'create'])->name('empresas.empresa.create');
+    Route::post('/empresas/store-empresa', [EmpresaController::class, 'store'])->name('empresas.empresa.store');
+    Route::get('/empresas/edit-empresa/{empresa}', [EmpresaController::class, 'edit'])->name('empresas.empresa.edit');
+    Route::put('/empresas/update-empresa/{empresa}', [EmpresaController::class, 'update'])->name('empresas.empresa.update');
+    Route::delete('/empresas/destroy-empresa/{empresa}', [EmpresaController::class, 'destroy'])->name('empresas.empresa.destroy');
 
     // Usuário
-    Route::get('/index-usuario', [UsuarioController::class, 'index'])->name('usuario.index');
-    Route::get('/show-usuario/{usuario}', [UsuarioController::class, 'show'])->name('usuario.show');
-    Route::get('/create-usuario', [UsuarioController::class, 'create'])->name('usuario.create');
-    Route::post('/store-usuario', [UsuarioController::class, 'store'])->name('usuario.store');
-    Route::get('/edit-usuario/{usuario}', [UsuarioController::class, 'edit'])->name('usuario.edit');
-    Route::put('/update-usuario/{usuario}', [UsuarioController::class, 'update'])->name('usuario.update');
-    Route::get('/edit-usuario-password/{usuario}', [UsuarioController::class, 'editPassword'])->name('usuario.edit-password');
-    Route::put('/update-usuario-password/{usuario}', [UsuarioController::class, 'updatePassword'])->name('usuario.update-password');
-    Route::delete('/destroy-usuario/{usuario}', [UsuarioController::class, 'destroy'])->name('usuario.destroy');
-
+    Route::get('/empresas/index-usuario', [UsuarioController::class, 'index'])->name('empresas.usuario.index');
+    Route::get('/empresas/show-usuario/{usuario}', [UsuarioController::class, 'show'])->name('empresas.usuario.show');
+    Route::get('/empresas/create-usuario', [UsuarioController::class, 'create'])->name('empresas.usuario.create');
+    Route::post('/empresas/store-usuario', [UsuarioController::class, 'store'])->name('empresas.usuario.store');
+    Route::get('/empresas/edit-usuario/{usuario}', [UsuarioController::class, 'edit'])->name('empresas.usuario.edit');
+    Route::put('/empresas/update-usuario/{usuario}', [UsuarioController::class, 'update'])->name('empresas.usuario.update');
+    Route::get('/empresas/edit-usuario-password/{usuario}', [UsuarioController::class, 'editPassword'])->name('empresas.usuario.edit-password');
+    Route::put('/empresas/update-usuario-password/{usuario}', [UsuarioController::class, 'updatePassword'])->name('empresas.usuario.update-password');
+    Route::delete('/empresas/destroy-usuario/{usuario}', [UsuarioController::class, 'destroy'])->name('empresas.usuario.destroy');
 
     // Perfil Empresa
-    Route::get('/show-profile-empresa', [EmpresaPerfilController::class, 'show'])->name('empresa_profile.show');
-    Route::get('/edit-profile-empresa', [EmpresaPerfilController::class, 'edit'])->name('empresa_profile.edit');
-    Route::put('/update-profile-empresa', [EmpresaPerfilController::class, 'update'])->name('empresa_profile.update');
-    Route::get('/edit-profile-logo', [EmpresaPerfilController::class, 'editLogo'])->name('empresa_profile.edit-logo');
-    Route::put('/update-profile-logo', [EmpresaPerfilController::class, 'updateLogo'])->name('empresa_profile.update-logo');
-    Route::get('/show-colaboradores-empresa', [EmpresaPerfilController::class, 'colaboradores'])->name('empresa_profile.colaboradores');
+    Route::get('/empresas/show-profile-empresa', [EmpresaPerfilController::class, 'show'])->name('empresas.empresa_profile.show');
+    Route::get('/empresas/edit-profile-empresa', [EmpresaPerfilController::class, 'edit'])->name('empresas.empresa_profile.edit');
+    Route::put('/empresas/update-profile-empresa', [EmpresaPerfilController::class, 'update'])->name('empresas.empresa_profile.update');
+    Route::get('/empresas/edit-profile-logo', [EmpresaPerfilController::class, 'editLogo'])->name('empresas.empresa_profile.edit-logo');
+    Route::put('/empresas/update-profile-logo', [EmpresaPerfilController::class, 'updateLogo'])->name('empresas.empresa_profile.update-logo');
+    Route::get('/empresas/show-colaboradores-empresa', [EmpresaPerfilController::class, 'colaboradores'])->name('empresas.empresa_profile.colaboradores');
 
     // Agenda
-    Route::get('/agenda', [TarefaController::class, 'index'])->name('tarefa.index');
-    Route::get('/agenda/create/{data}', [TarefaController::class, 'create'])->name('tarefa.create');
-    Route::post('/agenda/tarefa', [TarefaController::class, 'store'])->name('tarefa.store');
-    Route::get('/agenda/tarefas/{data}', [TarefaController::class, 'showTarefas'])->name('tarefa.show');
-    Route::get('/agenda/ajax', [TarefaController::class, 'calendar'])->name('tarefa.calendar');
+    Route::get('/empresas/agenda', [TarefaController::class, 'index'])->name('empresas.tarefa.index');
+    Route::get('/empresas/agenda/create/{data}', [TarefaController::class, 'create'])->name('empresas.tarefa.create');
+    Route::post('/empresas/agenda/tarefa', [TarefaController::class, 'store'])->name('empresas.tarefa.store');
+    Route::get('/empresas/agenda/tarefas/{data}', [TarefaController::class, 'showTarefas'])->name('empresas.tarefa.show');
+    Route::get('/empresas/agenda/ajax', [TarefaController::class, 'calendar'])->name('empresas.tarefa.calendar');
 });

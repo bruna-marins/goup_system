@@ -33,9 +33,9 @@
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="navbar-brand-wrapper d-flex justify-content-center">
                 <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
-                    <a class="navbar-brand brand-logo" href="{{ route('holding.index') }}"><img src="{{ asset('imagens/logo.svg') }}"
+                    <a class="navbar-brand brand-logo" href="{{ route('holdings.holding.index') }}"><img src="{{ asset('imagens/logo.svg') }}"
                             alt="Logo da Empresa"></a>
-                    <a class="navbar-brand brand-logo-mini" href="{{ route('holding.index') }}"><img
+                    <a class="navbar-brand brand-logo-mini" href="{{ route('holdings.holding.index') }}"><img
                             src="{{ asset('imagens/logo-mini.svg') }}" alt="Logo da Empresa"></a>
                     <button class="navbar-toggler navbar-toggler align-self-center" type="button"
                         data-toggle="minimize">
@@ -139,7 +139,7 @@
         <nav class="navbar-breadcrumb col-xl-12 col-12 d-flex flex-row p-0">
             <div class="navbar-links-wrapper d-flex align-items-stretch">
                 <div class="nav-link">
-                    <a href="{{ route('tarefa.index') }}" title="Agenda"><i class="fa-regular fa-calendar-days mx-0"></i></a>
+                    <a href="#" title="Agenda"><i class="fa-regular fa-calendar-days mx-0"></i></a>
                 </div>
                 <div class="nav-link">
                     <a href="javascript:;"><i class="fa-regular fa-envelope-days mx-0"></i></a>
@@ -185,7 +185,7 @@
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('dashboard.dashboard') }}">
+                        <a class="nav-link" href="{{ route('holdings.dashboard.dashboard') }}">
                             <i class="fa-solid fa-chart-line espaco menu-icon" style="color:#FF914D;"></i>
                             <span class="menu-title">Dashboard</span>
                             <div class="badge badge-danger">new</div>
@@ -201,9 +201,9 @@
                         </a>
                         <div class="collapse" id="auth">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="{{ route('usuario.index') }}">
+                                <li class="nav-item"> <a class="nav-link" href="#">
                                         Usuários </a></li>
-                                <li class="nav-item"> <a class="nav-link" href="{{ route('usuario.create') }}">
+                                <li class="nav-item"> <a class="nav-link" href="#">
                                         Cadastrar Usuário </a></li>
                             </ul>
                         </div>

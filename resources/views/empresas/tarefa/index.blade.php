@@ -5,7 +5,7 @@
 <div class="container">
     <div id="calendar-container">
         <!-- O conteúdo inicial do calendário será carregado aqui via AJAX -->
-        @include('tarefa.calendar', ['mesSelecionado' => $mesSelecionado, 'tarefasPorData' => []])
+        @include('empresas.tarefa.calendar', ['mesSelecionado' => $mesSelecionado, 'tarefasPorData' => []])
     </div>
 </div>
 
@@ -21,7 +21,7 @@
 
         // Requisição AJAX para carregar o calendário do mês selecionado
         $.ajax({
-            url: '{{ route('tarefa.calendar') }}', // Rota que processa o calendário via AJAX
+            url: '{{ route('empresas.tarefa.calendar') }}', // Rota que processa o calendário via AJAX
             type: 'GET',
             data: { mes: mes },
             success: function(data) {

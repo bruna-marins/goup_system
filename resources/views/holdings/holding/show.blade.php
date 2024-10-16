@@ -19,7 +19,7 @@
                     <div class="col-md-4">
                         <address>
                             <p class="fw-bold"> CNPJ: </p>
-                            <p class="mb-2">  {{ $holding->cnpj }} </p>
+                            <p class="mb-2"> {{ $holding->cnpj }} </p>
                             <p class="fw-bold"> Telefone: </p>
                             <p> {{ $holding->telefone }} </p>
                         </address>
@@ -34,7 +34,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <address>
-                            <p class="fw-bold">  Endereço: </p>
+                            <p class="fw-bold"> Endereço: </p>
                             <p>{{ $holding->endereco }}</p>
                         </address>
                     </div>
@@ -52,7 +52,8 @@
                     <div class="col-12">
                         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center py-2">
                             <h4 class="text-center mb-4">Empresas cadastradas nesta Holding</h4>
-                            <a href="{{ route('holding.create') }}" class="btn btn-inverse-info btn-sm"title="Cadastrar Nova Holding">
+                            <a href="{{ route('holdings.holding.create') }}"
+                                class="btn btn-inverse-info btn-sm"title="Cadastrar Nova Holding">
                                 <i class="fa-solid fa-plus btn-icon-prepend"></i>
                                 Nova Holding
                             </a>
@@ -60,19 +61,18 @@
                     </div>
                 </div>
                 <!-- topo da página -->
-                
-                    <!-- Verificar se há empresas cadastradas -->
-                    @if($holding->empresas->isEmpty())
-                        <!-- alerta -->
-                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                            <p class="card-description">
-                                Não há empresas cadastradas nesta holding.
-                            </p>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                        <!-- alerta -->
-                    @else
 
+                <!-- Verificar se há empresas cadastradas -->
+                @if ($holding->empresas->isEmpty())
+                    <!-- alerta -->
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <p class="card-description">
+                            Não há empresas cadastradas nesta holding.
+                        </p>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <!-- alerta -->
+                @else
                     <div class="table-responsive pt-3">
                         <table class="table table-striped project-orders-table table-hover">
                             <thead>
@@ -86,8 +86,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($holding->empresas as $empresa)
-                                <tr>
+                                @foreach ($holding->empresas as $empresa)
+                                    <tr>
                                     <tr>
                                         <td>{{ $empresa->id }}</td>
                                         <td>{{ $empresa->nome }}</td>
@@ -96,24 +96,25 @@
                                         <td>{{ $empresa->telefone }}</td>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <a href="{{ route('holding.edit', $holding->id) }}" class="btn btn-inverse-info btn-sm btn-icon-text me-3" title="Editar Holding">
-                                                    <i class="fa-solid fa-edit btn-icon-append"></i>                          
+                                                <a href="{{ route('holdings.holding.edit', $holding->id) }}"
+                                                    class="btn btn-inverse-info btn-sm btn-icon-text me-3"
+                                                    title="Editar Holding">
+                                                    <i class="fa-solid fa-edit btn-icon-append"></i>
                                                 </a>
-                                                <a href="{{ route('holding.show', $holding->id) }}" class="btn btn-inverse-info btn-sm btn-icon-text  me-3" title="Detalhes">
+                                                <a href="{{ route('holdings.holding.show', $holding->id) }}"
+                                                    class="btn btn-inverse-info btn-sm btn-icon-text  me-3"
+                                                    title="Detalhes">
                                                     <i class="fa-regular fa-eye"></i>
                                                 </a>
                                             </div>
                                         </td>
                                     </tr>
-                                </tr>
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                    @endif
-                </div>
-
+                @endif
             </div>
         </div>
     </div>
-
 @endsection

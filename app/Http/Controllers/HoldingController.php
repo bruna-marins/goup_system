@@ -13,7 +13,7 @@ class HoldingController extends Controller
 
         $holdings = Holding::all();
 
-        return view('holding.index', compact('holdings'));
+        return view('holdings.holding.index', compact('holdings'));
     }
 
     public function show($holding)
@@ -23,7 +23,7 @@ class HoldingController extends Controller
 
         $holding = Holding::findOrFail($holding);
 
-        return view('holding.show', compact('holding', 'empresas'));
+        return view('holdings.holding.show', compact('holding', 'empresas'));
     }
 
     public function create()
@@ -31,7 +31,7 @@ class HoldingController extends Controller
 
         $holdings = Holding::all();
 
-        return view('holding.create');
+        return view('holdings.holding.create');
     }
 
     public function store(Request $request)
@@ -47,7 +47,7 @@ class HoldingController extends Controller
 
         $holding = Holding::findOrFail($holding);
 
-        return view('holding.edit', compact('holding'));
+        return view('holdings.holding.edit', compact('holding'));
     }
 
     public function update(Request $request)

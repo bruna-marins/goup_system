@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('holdings.layout.admin')
 
 @section('content')
   
@@ -17,7 +17,7 @@
                 <!-- alerta -->
             
 
-                <form action="{{ route('holding.update', ['holding' => $holding->id]) }}" method="POST">
+                <form action="{{ route('holdings.holding.update', ['holding' => $holding->id]) }}" method="POST">
                     @csrf
                     @method('PUT')
 

@@ -8,7 +8,7 @@
         <!-- botao -->
         <div class="ms-md-auto py-2 py-md-0">
             <div class="btn-group" role="group" aria-label="Basic example">
-                <a href="{{ route('usuario.create') }}" class="btn btn-secondary btn-sm" title="Cadastrar Colaborador">
+                <a href="{{ route('empresas.usuario.create') }}" class="btn btn-secondary btn-sm" title="Cadastrar Colaborador">
                     <i class="fa-solid fa-plus"></i>
                 </a>
             </div>
@@ -50,13 +50,13 @@
                                                     <td>{{ $usuario->email }}</td>
                                                     <td style="width:200px" class="text-center">
                                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                                            <a href="{{ route('usuario.show', ['usuario' => $usuario->id]) }}"
+                                                            <a href="{{ route('empresas.usuario.show', ['usuario' => $usuario->id]) }}"
                                                                 class="btn btn-secondary btn-sm" title="Visualizar Usuário">
                                                                 <i class="fa-regular fa-eye"></i>
                                                             </a>
                                                         </div>
                                                         <div class="btn-group" role="group" aria-label="Basic example">
-                                                            <a href="{{ route('usuario.edit', ['usuario' => $usuario->id]) }}"
+                                                            <a href="{{ route('empresas.usuario.edit', ['usuario' => $usuario->id]) }}"
                                                                 class="btn btn-secondary btn-sm" title="Editar Usuário"> <i
                                                                     class="fa-solid fa-edit"></i>
                                                             </a>

@@ -35,28 +35,31 @@
                 @endfor
 
                 <!-- Preencher os dias do mês -->
-                @for($i = 1; $i <= $diasNoMes; $i++)
+                @for ($i = 1; $i <= $diasNoMes; $i++)
                     @php
                         $dataAtual = $mesSelecionado->copy()->day($i)->toDateString();
                         $quantidadeTarefas = $tarefasPorData[$dataAtual] ?? 0;
                     @endphp
 
                     <td>
-                        <a href="{{ route('tarefa.show', $dataAtual) }}" class="btn btn-light">
+                        <a href="{{ route('empresas.tarefa.create', $dataAtual) }}" class="btn btn-light">
                             {{ $i }}
-                            @if($quantidadeTarefas > 0)
+                        </a>
+                        <a href="{{ route('empresas.tarefa.show', $dataAtual) }}">
+                            @if ($quantidadeTarefas > 0)
                                 <span class="badge badge-warning">{{ $quantidadeTarefas }} Tarefa(s)</span>
                             @endif
                         </a>
                     </td>
 
-                    @if(($i + $diaDaSemanaPrimeiroDia) % 7 == 0)
-                        </tr><tr>
-                    @endif
+                    @if (($i + $diaDaSemanaPrimeiroDia) % 7 == 0)
+            </tr>
+            <tr>
+                @endif
                 @endfor
 
-                @if(($diasNoMes + $diaDaSemanaPrimeiroDia) % 7 != 0)
-                    @for($j = ($diasNoMes + $diaDaSemanaPrimeiroDia) % 7; $j < 7; $j++)
+                @if (($diasNoMes + $diaDaSemanaPrimeiroDia) % 7 != 0)
+                    @for ($j = ($diasNoMes + $diaDaSemanaPrimeiroDia) % 7; $j < 7; $j++)
                         <td></td>
                     @endfor
                 @endif

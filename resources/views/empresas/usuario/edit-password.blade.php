@@ -4,7 +4,7 @@
     <x-alert />
     <div class="container mt-5">
         <h2>Editar Senha</h2>
-        <form action="{{ route('usuario.update-password', $user->id) }}" method="POST">
+        <form action="{{ route('empresas.usuario.update-password', $user->id) }}" method="POST">
             @csrf
             @method('PUT')
 

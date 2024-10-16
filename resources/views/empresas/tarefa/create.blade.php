@@ -6,7 +6,7 @@
         <h2 class="text-center">Adicionar Tarefa Dia: {{ \Carbon\Carbon::parse($data)->format('d/m/Y') }}</h2>
 
         <!-- Formulário para adicionar tarefa -->
-        <form action="{{ route('tarefa.store') }}" method="POST">
+        <form action="{{ route('empresas.tarefa.store') }}" method="POST">
             @csrf
             <input type="hidden" name="data" value="{{ $data }}">
 

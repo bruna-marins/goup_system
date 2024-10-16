@@ -17,7 +17,7 @@ class UsuarioController extends Controller
 
         $usuarios = User::all();
 
-        return view('usuario.index', compact('usuarios'));
+        return view('empresas.usuario.index', compact('usuarios'));
     }
 
 
@@ -26,7 +26,7 @@ class UsuarioController extends Controller
         $empresaId = Auth::user()->empresa_id;
         $empresa = Empresa::where('id', $empresaId)->get()->first();
 
-        return view('usuario.show', compact('empresa'), ['user' => $usuario]);
+        return view('empresas.usuario.show', compact('empresa'), ['user' => $usuario]);
     }
 
 
@@ -35,7 +35,7 @@ class UsuarioController extends Controller
         //$roles = Role::pluck('name')->all();
 
         //return view('usuario.create', ['roles' => $roles]);
-        return view('usuario.create');
+        return view('empresas.usuario.create');
     }
 
 
@@ -55,7 +55,7 @@ class UsuarioController extends Controller
             'empresa_id' => $request['empresa_id'],
         ]);
 
-        return redirect()->route('usuario.index')->with('success', 'Cadastrado com sucesso!');
+        return redirect()->route('empresas.usuario.index')->with('success', 'Cadastrado com sucesso!');
     }
 
 
@@ -66,7 +66,7 @@ class UsuarioController extends Controller
         //$usuarioRoles = $usuario->roles->pluck('name')->first();
 
         //return view('usuario.edit', ['usuario' => $usuario, 'roles' => $roles, 'usuarioRoles' => $usuarioRoles]);
-        return view('usuario.edit', ['usuario' => $usuario]);
+        return view('empresas.usuario.edit', ['usuario' => $usuario]);
 
     }
 
@@ -82,7 +82,7 @@ class UsuarioController extends Controller
         $usuario->name = $validatedData['name'];
         $usuario->email = $validatedData['email'];
 
-        return redirect()->route('usuario.show', ['usuario' => $request->usuario])->with('success', 'Usuário editado!');
+        return redirect()->route('empresas.usuario.show', ['usuario' => $request->usuario])->with('success', 'Usuário editado!');
     }
 
 
@@ -92,7 +92,7 @@ class UsuarioController extends Controller
         $usuario = User::where('id', Auth::id())->first();
 
         // Carrega a view
-        return view('profile.edit-password', ['user' => $usuario]);
+        return view('empresas.profile.edit-password', ['user' => $usuario]);
     }
 
 
@@ -114,7 +114,7 @@ class UsuarioController extends Controller
             'password' => $request->password,
         ]);
 
-        return redirect()->route('usuario.show', ['usuario' => $request->usuario])->with('success', 'Senha atualizada com sucesso!');
+        return redirect()->route('empresas.usuario.show', ['usuario' => $request->usuario])->with('success', 'Senha atualizada com sucesso!');
     }
 
 
@@ -128,9 +128,9 @@ class UsuarioController extends Controller
             $usuario->syncRoles([]);
 
             //Redirecionar o usuário
-            return redirect()->route('usuario.index')->with('success', 'Usuário excluido com sucesso!');
+            return redirect()->route('empresas.usuario.index')->with('success', 'Usuário excluido com sucesso!');
         } catch(Exception $e){
-            return redirect()->route('usuario.index')->with('error', 'Usuário não excluído!');
+            return redirect()->route('empresas.usuario.index')->with('error', 'Usuário não excluído!');
         }
 
     }
