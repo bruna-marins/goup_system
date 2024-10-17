@@ -33,8 +33,8 @@
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="navbar-brand-wrapper d-flex justify-content-center">
                 <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">
-                    <a class="navbar-brand brand-logo" href="{{ route('holdings.holding.index') }}"><img src="{{ asset('imagens/logo.svg') }}"
-                            alt="Logo da Empresa"></a>
+                    <a class="navbar-brand brand-logo" href="{{ route('holdings.holding.index') }}"><img
+                            src="{{ asset('imagens/logo.svg') }}" alt="Logo da Empresa"></a>
                     <a class="navbar-brand brand-logo-mini" href="{{ route('holdings.holding.index') }}"><img
                             src="{{ asset('imagens/logo-mini.svg') }}" alt="Logo da Empresa"></a>
                     <button class="navbar-toggler navbar-toggler align-self-center" type="button"
@@ -47,21 +47,31 @@
                 <ul class="navbar-nav me-lg-2">
                     <li class="nav-item nav-profile dropdown">
                         <a class="nav-link" href="#" data-bs-toggle="dropdown" id="profileDropdown">
-                            <img src="{{ asset('imagens/faces/face1.jpg') }}" alt="nome da pessoa">
-                            <span class="nav-profile-name">
-                                @if (auth()->check())
+                            @if (Auth::check())
+                                <div class="avatar-lg">
+                                    <img src="{{ Auth::user()->foto_perfil ? asset('storage/' . Auth::user()->foto_perfil) : asset('images/default-avatar.png') }}"
+                                        alt="Foto de perfil" class="avatar-img rounded">
+                                </div>
+                                <span class="nav-profile-name">
                                     {{ auth()->user()->name }}
-                                @endif
-                            </span>
+                                </span>
+                            @endif
+
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
                             aria-labelledby="profileDropdown">
-                            <a class="dropdown-item">
-                                <i class="typcn fa-regular fa-cog-outline text-primary"></i>
-                                Settings
+                            <a class="dropdown-item" href="{{ route('holdings.profile.show') }}">
+                                <i class="fa-solid fa-user"></i>
+                                Meu Perfil
                             </a>
-                            <a class="dropdown-item" href="{{ route('login.destroy') }}"><i
-                                    class="fa-solid fa-arrow-right-from-bracket"></i> Sair</a>
+                            <a class="dropdown-item">
+                                <i class="fa-solid fa-store"></i>
+                                Perfil Empresa
+                            </a>
+                            <a class="dropdown-item" href="{{ route('login.destroy') }}">
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                                Sair
+                            </a>
                         </div>
                     </li>
                     <li class="nav-item nav-user-status dropdown">
@@ -201,7 +211,8 @@
                         </a>
                         <div class="collapse" id="auth">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="#">
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{ route('holdings.usuario.index') }}">
                                         Usuários </a></li>
                                 <li class="nav-item"> <a class="nav-link" href="#">
                                         Cadastrar Usuário </a></li>

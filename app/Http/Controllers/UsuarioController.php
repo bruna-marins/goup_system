@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UsuarioRequest;
 use App\Models\Empresa;
+use App\Models\HoldingUser;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -13,7 +14,24 @@ use Spatie\Permission\Models\Role;
 
 class UsuarioController extends Controller
 {
-    public function index(){
+    public function indexHolding(){
+
+        $usuarios = HoldingUser::all();
+
+        return view('holdings.usuario.index', compact('usuarios'));
+    }
+
+
+
+
+
+
+
+
+
+
+
+    public function indexEmpresa(){
 
         $usuarios = User::all();
 
@@ -21,7 +39,7 @@ class UsuarioController extends Controller
     }
 
 
-    public function show(User $usuario){
+    public function showEmpresa(User $usuario){
 
         $empresaId = Auth::user()->empresa_id;
         $empresa = Empresa::where('id', $empresaId)->get()->first();
@@ -30,7 +48,7 @@ class UsuarioController extends Controller
     }
 
 
-    public function create(){
+    public function createEmpresa(){
 
         //$roles = Role::pluck('name')->all();
 
@@ -39,7 +57,7 @@ class UsuarioController extends Controller
     }
 
 
-    public function store(Request $request){
+    public function storeEmpresa(Request $request){
 
         $validated = $request->validate([
             'name' => 'required',
@@ -59,7 +77,7 @@ class UsuarioController extends Controller
     }
 
 
-    public function edit(User $usuario){
+    public function editEmpresa(User $usuario){
 
         //$roles = Role::pluck('name')->all();
 
@@ -71,7 +89,7 @@ class UsuarioController extends Controller
     }
 
 
-    public function update(Request $request, User $usuario){
+    public function updateEmpresa(Request $request, User $usuario){
 
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
@@ -86,7 +104,7 @@ class UsuarioController extends Controller
     }
 
 
-    public function editPassword(){
+    public function editPasswordEmpresa(){
 
         // Recuperar do banco de dados as informações do usuário logado
         $usuario = User::where('id', Auth::id())->first();
@@ -96,7 +114,7 @@ class UsuarioController extends Controller
     }
 
 
-    public function updatePassword(Request $request)
+    public function updatePasswordEmpresa(Request $request)
     {
         // Recuperar do banco de dados as informações do usuário logado
         $usuario = User::where('id', Auth::id())->first();
@@ -110,7 +128,7 @@ class UsuarioController extends Controller
         ]);
 
         // Editar as informações no banco de dados
-        $usuario->update([
+        $usuario->updateEmpresa([
             'password' => $request->password,
         ]);
 
@@ -118,7 +136,7 @@ class UsuarioController extends Controller
     }
 
 
-    public function destroy(User $usuario){
+    public function destroyEmpresa(User $usuario){
 
         try{
             //Excluir registro

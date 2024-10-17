@@ -5,6 +5,7 @@ use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\EmpresaPerfilController;
 use App\Http\Controllers\HoldingController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TarefaController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +34,26 @@ Route::group(['middleware' => 'auth:web,holding'], function () {
     Route::put('/holdings/update-holding/{holding}', [HoldingController::class, 'update'])->name('holdings.holding.update');
     Route::delete('/holdings/destroy-holding/{holding}', [HoldingController::class, 'destroy'])->name('holdings.holding.destroy');
 
+    // Usuário
+    Route::get('/holdings/index-usuario', [UsuarioController::class, 'indexHolding'])->name('holdings.usuario.index');
+    Route::get('/holdings/show-usuario/{usuario}', [UsuarioController::class, 'showHolding'])->name('holdings.usuario.show');
+    Route::get('/holdings/create-usuario', [UsuarioController::class, 'createHolding'])->name('holdings.usuario.create');
+    Route::post('/holdings/store-usuario', [UsuarioController::class, 'storeHolding'])->name('holdings.usuario.store');
+    Route::get('/holdings/edit-usuario/{usuario}', [UsuarioController::class, 'editHolding'])->name('holdings.usuario.edit');
+    Route::put('/holdings/update-usuario/{usuario}', [UsuarioController::class, 'updateHolding'])->name('holdings.usuario.update');
+    Route::get('/holdings/edit-usuario-password/{usuario}', [UsuarioController::class, 'editPasswordHolding'])->name('holdings.usuario.edit-password');
+    Route::put('/holdings/update-usuario-password/{usuario}', [UsuarioController::class, 'updatePasswordHolding'])->name('holdings.usuario.update-password');
+    Route::delete('/holdings/destroy-usuario/{usuario}', [UsuarioController::class, 'destroyHolding'])->name('holdings.usuario.destroy');
+
+    // Perfil
+    Route::get('/holdings/show-profile', [ProfileController::class, 'showHolding'])->name('holdings.profile.show');
+    Route::get('/holdings/edit-profile', [ProfileController::class, 'editHolding'])->name('holdings.profile.edit');
+    Route::put('/holdings/update-profile', [ProfileController::class, 'updateHolding'])->name('holdings.profile.update');
+    Route::get('/holdings/edit-profile-foto', [ProfileController::class, 'editFotoHolding'])->name('holdings.profile.edit-foto');
+    Route::put('/holdings/update-profile-foto', [ProfileController::class, 'updateFotoHolding'])->name('holdings.profile.update-foto');
+    Route::get('/holdings/edit-profile-password', [ProfileController::class, 'editPasswordHolding'])->name('holdings.profile.edit-password');
+    Route::put('/holdings/update-profile-password', [ProfileController::class, 'updatePasswordHolding'])->name('holdings.profile.update-password');
+
 
 
     // Rotas para as Empresas
@@ -50,15 +71,15 @@ Route::group(['middleware' => 'auth:web,holding'], function () {
     Route::delete('/empresas/destroy-empresa/{empresa}', [EmpresaController::class, 'destroy'])->name('empresas.empresa.destroy');
 
     // Usuário
-    Route::get('/empresas/index-usuario', [UsuarioController::class, 'index'])->name('empresas.usuario.index');
-    Route::get('/empresas/show-usuario/{usuario}', [UsuarioController::class, 'show'])->name('empresas.usuario.show');
-    Route::get('/empresas/create-usuario', [UsuarioController::class, 'create'])->name('empresas.usuario.create');
-    Route::post('/empresas/store-usuario', [UsuarioController::class, 'store'])->name('empresas.usuario.store');
-    Route::get('/empresas/edit-usuario/{usuario}', [UsuarioController::class, 'edit'])->name('empresas.usuario.edit');
-    Route::put('/empresas/update-usuario/{usuario}', [UsuarioController::class, 'update'])->name('empresas.usuario.update');
-    Route::get('/empresas/edit-usuario-password/{usuario}', [UsuarioController::class, 'editPassword'])->name('empresas.usuario.edit-password');
-    Route::put('/empresas/update-usuario-password/{usuario}', [UsuarioController::class, 'updatePassword'])->name('empresas.usuario.update-password');
-    Route::delete('/empresas/destroy-usuario/{usuario}', [UsuarioController::class, 'destroy'])->name('empresas.usuario.destroy');
+    Route::get('/empresas/index-usuario', [UsuarioController::class, 'indexEmpresa'])->name('empresas.usuario.index');
+    Route::get('/empresas/show-usuario/{usuario}', [UsuarioController::class, 'showEmpresa'])->name('empresas.usuario.show');
+    Route::get('/empresas/create-usuario', [UsuarioController::class, 'createEmpresa'])->name('empresas.usuario.create');
+    Route::post('/empresas/store-usuario', [UsuarioController::class, 'storeEmpresa'])->name('empresas.usuario.store');
+    Route::get('/empresas/edit-usuario/{usuario}', [UsuarioController::class, 'editEmpresa'])->name('empresas.usuario.edit');
+    Route::put('/empresas/update-usuario/{usuario}', [UsuarioController::class, 'updateEmpresa'])->name('empresas.usuario.update');
+    Route::get('/empresas/edit-usuario-password/{usuario}', [UsuarioController::class, 'editPasswordEmpresa'])->name('empresas.usuario.edit-password');
+    Route::put('/empresas/update-usuario-password/{usuario}', [UsuarioController::class, 'updatePasswordEmpresa'])->name('empresas.usuario.update-password');
+    Route::delete('/empresas/destroy-usuario/{usuario}', [UsuarioController::class, 'destroyEmpresa'])->name('empresas.usuario.destroy');
 
     // Perfil Empresa
     Route::get('/empresas/show-profile-empresa', [EmpresaPerfilController::class, 'show'])->name('empresas.empresa_profile.show');
