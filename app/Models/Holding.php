@@ -17,4 +17,9 @@ class Holding extends Model
     {
         return $this->hasMany(Empresa::class);
     }
+
+    public function usuarios()
+    {
+        return $this->hasMany(HoldingUser::class);
+    }
 }

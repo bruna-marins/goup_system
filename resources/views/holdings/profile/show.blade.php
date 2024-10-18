@@ -59,10 +59,10 @@
                         </form>
                         <div class="mb-3">
                             <a href="{{ route('holdings.profile.edit') }}">
-                                <button class="btn btn-info"> Editar Perfil</button>
+                                <button class="btn btn-primary"> Editar Perfil</button>
                             </a>
-                            <a href="#">
-                                <button class="btn btn-info">Perfil {{ $holding->nome }}</button>
+                            <a href="{{ route('holdings.empresa_profile.show') }}">
+                                <button class="btn btn-primary">Perfil {{ $holding->nome }}</button>
                             </a>
                             <a href="{{ route('holdings.profile.edit-password') }}">
                                 <button class="btn btn-danger">Alterar Senha</button>

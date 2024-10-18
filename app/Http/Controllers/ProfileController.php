@@ -66,7 +66,7 @@ class ProfileController extends Controller
     {
 
         // Recuperar do banco de dados as informações do usuário logado
-        $usuario = User::where('id', Auth::id())->first();
+        $usuario = HoldingUser::where('id', Auth::id())->first();
 
         // Carrega a view
         return view('holdings.profile.edit-foto', ['user' => $usuario]);

@@ -10,18 +10,12 @@
                 <div class="card">
                     <div class="card-body text-center">
 
-                        <img src="{{ $user->foto_perfil ? asset('storage/' . $user->foto_perfil) : asset('images/default-avatar.png') }}"
-                            alt="Foto de perfil" width="100" height="100" class="rounded-circle img-fluid ">
+                        <img src="{{ $user->foto_perfil ? asset('storage/' . $user->foto_perfil) : asset('imagens/default-avatar.png') }}"
+                            alt="Foto de perfil" width="183" height="183" class="rounded-circle img-fluid ">
 
                         <h4 class="mt-3">{{ $user->name }}</h4>
 
-                        <p>{{ $empresa->nome }}</p>
-
-                        @if ($user->situacao === 1)
-                            <p class="text-primary"><i class="fa-solid fa-circle"></i> Ativo</p>
-                        @else
-                            <p class="text-danger"><i class="fa-solid fa-circle" style="color: #ff0000;"></i> Desativado</p>
-                        @endif
+                        <p>{{ $holding->nome }}</p>
 
                         <!-- Último Acesso -->
                         <div class="table-responsive">
@@ -33,7 +27,7 @@
                                         </td>
                                         <td>
                                             @if ($user->last_login_at)
-                                                {{ $user->last_login_at }}
+                                                {{ $user->last_login_at->diffForHumans() }}
                                             @else
                                                 Nunca logado
                                             @endif
@@ -59,7 +53,7 @@
                             <div class="ms-md-auto py-2 py-md-0">
                                 <div class="btn-group" role="group" aria-label="Basic example">
 
-                                    <form action="{{ route('empresas.usuario.destroy', ['usuario' => $user->id]) }}"
+                                    <form action="{{ route('holdings.usuario.destroy', ['usuario' => $user->id]) }}"
                                         method="POST">
                                         @csrf
                                         @method('delete')
@@ -86,18 +80,6 @@
                                     <input type="email" class="form-control" id="email" value="{{ $user->email }}"
                                         readonly>
                                 </div>
-
-                                <div class="form-group col-md-12">
-                                    @forelse ($user->getRoleNames() as $role)
-                                        <label for="role" class="form-label">Nível de Usuário</label>
-                                        <input type="text" class="form-control" id="role"
-                                            value="{{ $role }}" readonly>
-                                    @empty
-                                        <label for="role" class="form-label">Nível de Usuário</label>
-                                        <input type="text" class="form-control" id="role"
-                                            value="{{ '-' }}" readonly>
-                                    @endforelse
-                                </div>
                             </div>
 
                         </form>
@@ -105,10 +87,10 @@
                         <div class="row pt-4">
                             <div class="col-md-12">
                                 <div class="text-center">
-                                    <a href="{{ route('empresas.usuario.edit', ['usuario' => $user->id]) }}">
+                                    <a href="{{ route('holdings.usuario.edit', ['usuario' => $user->id]) }}">
                                         <button class="btn btn-secondary">Editar Perfil</button>
                                     </a>
-                                    <a href="{{ route('empresas.usuario.edit-password', ['usuario' => $user->id]) }}">
+                                    <a href="{{ route('holdings.usuario.edit-password', ['usuario' => $user->id]) }}">
                                         <button class="btn btn-secondary">Alterar Senha</button>
                                     </a>
                                 </div>

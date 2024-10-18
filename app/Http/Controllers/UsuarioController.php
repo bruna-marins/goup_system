@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UsuarioRequest;
 use App\Models\Empresa;
+use App\Models\Holding;
 use App\Models\HoldingUser;
 use App\Models\User;
 use Exception;
@@ -14,23 +15,6 @@ use Spatie\Permission\Models\Role;
 
 class UsuarioController extends Controller
 {
-    public function indexHolding(){
-
-        $usuarios = HoldingUser::all();
-
-        return view('holdings.usuario.index', compact('usuarios'));
-    }
-
-
-
-
-
-
-
-
-
-
-
     public function indexEmpresa(){
 
         $usuarios = User::all();

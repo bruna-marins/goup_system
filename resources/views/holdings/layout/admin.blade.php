@@ -49,7 +49,7 @@
                         <a class="nav-link" href="#" data-bs-toggle="dropdown" id="profileDropdown">
                             @if (Auth::check())
                                 <div class="avatar-lg">
-                                    <img src="{{ Auth::user()->foto_perfil ? asset('storage/' . Auth::user()->foto_perfil) : asset('images/default-avatar.png') }}"
+                                    <img src="{{ Auth::user()->foto_perfil ? asset('storage/' . Auth::user()->foto_perfil) : asset('imagens/default-avatar.png') }}"
                                         alt="Foto de perfil" class="avatar-img rounded">
                                 </div>
                                 <span class="nav-profile-name">
@@ -224,17 +224,15 @@
                         <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
                             aria-controls="ui-basic">
                             <i class="fa-regular fa-folder espaco menu-icon" style="color:#FF914D;"></i>
-                            <span class="menu-title">UI Elements</span>
+                            <span class="menu-title">Clientes</span>
                             <i class="menu-arrow"></i>
                         </a>
                         <div class="collapse" id="ui-basic">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link"
-                                        href="../../pages/ui-features/buttons.html">Buttons</a></li>
+                                        href="../../pages/ui-features/buttons.html">Holdings</a></li>
                                 <li class="nav-item"> <a class="nav-link"
-                                        href="../../pages/ui-features/dropdowns.html">Dropdowns</a></li>
-                                <li class="nav-item"> <a class="nav-link"
-                                        href="../../pages/ui-features/typography.html">Typography</a></li>
+                                        href="{{ route('holdings.clientes.index') }}">Empresas</a></li>
                             </ul>
                         </div>
                     </li>

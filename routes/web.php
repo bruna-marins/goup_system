@@ -1,13 +1,16 @@
 <?php
 
+use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\EmpresaPerfilController;
 use App\Http\Controllers\HoldingController;
+use App\Http\Controllers\HoldingUserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TarefaController;
 use App\Http\Controllers\UsuarioController;
+use App\Models\HoldingUser;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -35,15 +38,25 @@ Route::group(['middleware' => 'auth:web,holding'], function () {
     Route::delete('/holdings/destroy-holding/{holding}', [HoldingController::class, 'destroy'])->name('holdings.holding.destroy');
 
     // Usuário
-    Route::get('/holdings/index-usuario', [UsuarioController::class, 'indexHolding'])->name('holdings.usuario.index');
-    Route::get('/holdings/show-usuario/{usuario}', [UsuarioController::class, 'showHolding'])->name('holdings.usuario.show');
-    Route::get('/holdings/create-usuario', [UsuarioController::class, 'createHolding'])->name('holdings.usuario.create');
-    Route::post('/holdings/store-usuario', [UsuarioController::class, 'storeHolding'])->name('holdings.usuario.store');
-    Route::get('/holdings/edit-usuario/{usuario}', [UsuarioController::class, 'editHolding'])->name('holdings.usuario.edit');
-    Route::put('/holdings/update-usuario/{usuario}', [UsuarioController::class, 'updateHolding'])->name('holdings.usuario.update');
-    Route::get('/holdings/edit-usuario-password/{usuario}', [UsuarioController::class, 'editPasswordHolding'])->name('holdings.usuario.edit-password');
-    Route::put('/holdings/update-usuario-password/{usuario}', [UsuarioController::class, 'updatePasswordHolding'])->name('holdings.usuario.update-password');
-    Route::delete('/holdings/destroy-usuario/{usuario}', [UsuarioController::class, 'destroyHolding'])->name('holdings.usuario.destroy');
+    Route::get('/holdings/index-usuario', [HoldingUserController::class, 'indexHolding'])->name('holdings.usuario.index');
+    Route::get('/holdings/show-usuario/{usuario}', [HoldingUserController::class, 'showHolding'])->name('holdings.usuario.show');
+    Route::get('/holdings/create-usuario', [HoldingUserController::class, 'createHolding'])->name('holdings.usuario.create');
+    Route::post('/holdings/store-usuario', [HoldingUserController::class, 'storeHolding'])->name('holdings.usuario.store');
+    Route::get('/holdings/edit-usuario/{usuario}', [HoldingUserController::class, 'editHolding'])->name('holdings.usuario.edit');
+    Route::put('/holdings/update-usuario/{usuario}', [HoldingUserController::class, 'updateHolding'])->name('holdings.usuario.update');
+    Route::get('/holdings/edit-usuario-password/{usuario}', [HoldingUserController::class, 'editPasswordHolding'])->name('holdings.usuario.edit-password');
+    Route::put('/holdings/update-usuario-password/{usuario}', [HoldingUserController::class, 'updatePasswordHolding'])->name('holdings.usuario.update-password');
+    Route::delete('/holdings/destroy-usuario/{usuario}', [HoldingUserController::class, 'destroyHolding'])->name('holdings.usuario.destroy');
+
+    // Cliente Empresas
+    Route::get('/holdings/index-cliente-empresa', [ClienteController::class, 'indexEmpresa'])->name('holdings.clientes.index');
+    Route::get('/holdings/show-cliente-empresa/{cliente}', [ClienteController::class, 'showEmpresa'])->name('holdings.clientes.show');
+    Route::get('/holdings/create-cliente-empresa', [ClienteController::class, 'createEmpresa'])->name('holdings.clientes.create');
+    Route::post('/holdings/store-cliente-empresa', [ClienteController::class, 'storeEmpresa'])->name('holdings.clientes.store');
+    Route::get('/holdings/edit-cliente-empresa/{cliente}', [ClienteController::class, 'editEmpresa'])->name('holdings.clientes.edit');
+    Route::put('/holdings/update-cliente-empresa/{cliente}', [ClienteController::class, 'updateEmpresa'])->name('holdings.clientes.update');
+    Route::delete('/holdings/destroy-cliente-empresa/{cliente}', [ClienteController::class, 'destroyEmpresa'])->name('holdings.clientes.destroy');
+    Route::get('/holdings/show-colaboradores-empresa/{cliente}', [ClienteController::class, 'colaboradoresEmpresa'])->name('holdings.clientes.colaboradores');
 
     // Perfil
     Route::get('/holdings/show-profile', [ProfileController::class, 'showHolding'])->name('holdings.profile.show');
@@ -53,6 +66,12 @@ Route::group(['middleware' => 'auth:web,holding'], function () {
     Route::put('/holdings/update-profile-foto', [ProfileController::class, 'updateFotoHolding'])->name('holdings.profile.update-foto');
     Route::get('/holdings/edit-profile-password', [ProfileController::class, 'editPasswordHolding'])->name('holdings.profile.edit-password');
     Route::put('/holdings/update-profile-password', [ProfileController::class, 'updatePasswordHolding'])->name('holdings.profile.update-password');
+
+    // Perfil Holding
+    Route::get('/holdings/show-profile-holding', [EmpresaPerfilController::class, 'showHolding'])->name('holdings.holding_profile.show');
+    Route::get('/holdings/edit-profile-holding', [EmpresaPerfilController::class, 'editHolding'])->name('holdings.holding_profile.edit');
+    Route::put('/holdings/update-profile-holding', [EmpresaPerfilController::class, 'updateHolding'])->name('holdings.holding_profile.update');
+    Route::get('/holdings/show-colaboradores-holding', [EmpresaPerfilController::class, 'colaboradoresHolding'])->name('holdings.holding_profile.colaboradores');
 
 
 
