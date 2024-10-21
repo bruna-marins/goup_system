@@ -32,30 +32,6 @@ class TarefaController extends Controller
         ]);
     }
 
-    // Método que será chamado via AJAX para carregar o calendário
-    public function calendar(Request $request)
-    {
-        // Pega o mês selecionado
-        $mesSelecionado = $request->input('mes') ? Carbon::parse($request->input('mes')) : now();
-
-        // Obter todas as tarefas agrupadas por data, junto com a contagem de tarefas para cada dia no mês selecionado
-        $tarefasPorData = Tarefa::whereYear('data', $mesSelecionado->year)
-            ->whereMonth('data', $mesSelecionado->month)
-            ->select('data', DB::raw('count(*) as total'))
-            ->groupBy('data')
-            ->get()
-            ->pluck('total', 'data')
-            ->toArray();
-
-        // Retorna o conteúdo do calendário como uma view parcial
-        return view('empresas.tarefa.calendar', [
-            'tarefasPorData' => $tarefasPorData,
-            'mesSelecionado' => $mesSelecionado,
-            'mesAnterior' => $mesSelecionado->copy()->subMonth(),
-            'mesProximo' => $mesSelecionado->copy()->addMonth(),
-        ])->render(); // Renderiza como string para ser usada no AJAX
-    }
-
     public function create($data)
     {
         // Buscar todas as tarefas para um dia específico

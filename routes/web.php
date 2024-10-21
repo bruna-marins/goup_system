@@ -113,5 +113,4 @@ Route::group(['middleware' => 'auth:web,holding'], function () {
     Route::get('/empresas/agenda/create/{data}', [TarefaController::class, 'create'])->name('empresas.tarefa.create');
     Route::post('/empresas/agenda/tarefa', [TarefaController::class, 'store'])->name('empresas.tarefa.store');
     Route::get('/empresas/agenda/tarefas/{data}', [TarefaController::class, 'showTarefas'])->name('empresas.tarefa.show');
-    Route::get('/empresas/agenda/ajax', [TarefaController::class, 'calendar'])->name('empresas.tarefa.calendar');
 });

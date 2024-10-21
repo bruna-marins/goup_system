@@ -325,8 +325,6 @@
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    @yield('scripts') <!-- Incluir scripts específicos da página -->
-
 </body>
 
 </html>

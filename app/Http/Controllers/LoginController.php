@@ -26,13 +26,13 @@ class LoginController extends Controller
         // Primeira tentativa: tentar autenticar o usuário da tabela 'users'
         if (Auth::guard('web')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
             // Se o login for bem-sucedido, redireciona para o dashboard do usuário
-            return redirect()->route('empresas.empresa.index');
+            return redirect()->route('empresas.dashboard.dashboard');
         }
 
         // Segunda tentativa: tentar autenticar o usuário da tabela 'holding_users'
         if (Auth::guard('holding')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
             // Se o login for bem-sucedido, redireciona para o dashboard da holding
-            return redirect()->route('holdings.holding.index');
+            return redirect()->route('holdings.dashboard.dashboard');
         }
 
         // Se ambas as tentativas falharem, redireciona de volta com erro

@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('empresas.layout.admin')
 
 @section('content')
 
