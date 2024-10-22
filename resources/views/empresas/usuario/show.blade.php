@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('empresas.layout.admin')
 
 @section('content')
     <x-alert />
@@ -10,18 +10,12 @@
                 <div class="card">
                     <div class="card-body text-center">
 
-                        <img src="{{ $user->foto_perfil ? asset('storage/' . $user->foto_perfil) : asset('images/default-avatar.png') }}"
-                            alt="Foto de perfil" width="100" height="100" class="rounded-circle img-fluid ">
+                        <img src="{{ $user->foto_perfil ? asset('storage/' . $user->foto_perfil) : asset('imagens/default-avatar.png') }}"
+                            alt="Foto de perfil" width="183" height="183" class="rounded-circle img-fluid ">
 
                         <h4 class="mt-3">{{ $user->name }}</h4>
 
                         <p>{{ $empresa->nome }}</p>
-
-                        @if ($user->situacao === 1)
-                            <p class="text-primary"><i class="fa-solid fa-circle"></i> Ativo</p>
-                        @else
-                            <p class="text-danger"><i class="fa-solid fa-circle" style="color: #ff0000;"></i> Desativado</p>
-                        @endif
 
                         <!-- Último Acesso -->
                         <div class="table-responsive">
@@ -33,7 +27,7 @@
                                         </td>
                                         <td>
                                             @if ($user->last_login_at)
-                                                {{ $user->last_login_at }}
+                                                {{ $user->last_login_at->diffForHumans() }}
                                             @else
                                                 Nunca logado
                                             @endif
@@ -85,18 +79,6 @@
                                     <label>E-mail</label>
                                     <input type="email" class="form-control" id="email" value="{{ $user->email }}"
                                         readonly>
-                                </div>
-
-                                <div class="form-group col-md-12">
-                                    @forelse ($user->getRoleNames() as $role)
-                                        <label for="role" class="form-label">Nível de Usuário</label>
-                                        <input type="text" class="form-control" id="role"
-                                            value="{{ $role }}" readonly>
-                                    @empty
-                                        <label for="role" class="form-label">Nível de Usuário</label>
-                                        <input type="text" class="form-control" id="role"
-                                            value="{{ '-' }}" readonly>
-                                    @endforelse
                                 </div>
                             </div>
 

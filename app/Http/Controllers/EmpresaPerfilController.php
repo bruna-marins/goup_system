@@ -71,7 +71,6 @@ class EmpresaPerfilController extends Controller
         return redirect()->route('holdings.empresa_profile.show', ['holding' => $holding])->with('success', 'Perfil editado com sucesso!');
     }
 
-
     public function colaboradoresHolding()
     {
 
@@ -88,5 +87,84 @@ class EmpresaPerfilController extends Controller
 
         // Carrega a view
         return view('holdings.empresa_profile.colaboradores', ['holding' => $holding, 'colaboradores' => $colaboradores]);
+    }
+
+    
+
+    // A partir desse ponto as funções estão relacionadas com empresas
+
+    public function showEmpresa(){
+
+        // Recuperar do banco de dados as informações do usuário logado
+        $empresaId = Auth::user()->empresa_id;
+        $empresa = Empresa::where('id', $empresaId)->get()->first();
+
+        $colaboradores = Empresa::with('usuarios')->findOrFail($empresaId);
+
+        // Carrega a view
+        return view('empresas.empresa_profile.show', ['empresa' => $empresa, 'colaboradores' => $colaboradores]);
+    }
+
+
+    public function editEmpresa(){
+
+        // Recuperar do banco de dados as informações do usuário logado
+        $empresaId = Auth::user()->empresa_id;
+        $empresa = Empresa::where('id', $empresaId)->get()->first();
+
+        return view('empresas.empresa_profile.edit', ['empresa' => $empresa]);
+    }
+
+
+    public function updateEmpresa(Request $request, Empresa $empresa){
+
+        // Recuperar do banco de dados as informações do usuário logado
+        $empresaId = Auth::user()->empresa_id;
+        $empresa = Empresa::where('id', $empresaId)->get()->first();
+
+        $request->validate([
+            'nome' => 'required|string|max:255',
+            'cnpj' => 'required',
+            'telefone' => 'required',
+            'email' => 'required|email|',
+            'endereco' => 'required',
+        ],[
+            // Mensagens de erro
+            'nome.required' => 'O campo Nome é obrigatório.',
+            'cnpj.required' => 'O campo CNPJ é obrigatório.',
+            'telefone.required' => 'O campo Telefone é obrigatório.',
+            'email.required' => 'O campo E-mail é obrigatório.',
+            'email.email' => 'Cnpj inválido.',
+            'email.unique' => 'Esse E-mail já está sendo usado.',
+            'endereco.required' => 'O campo Endereço é obrigatório.',
+        ]);
+
+        $empresa->update([
+            'nome' => $request->nome,
+            'cnpj' => $request->cnpj,
+            'email' => $request->email,
+            'telefone' => $request->telefone,
+            'endereco' => $request->endereco,
+        ]);
+
+        return redirect()->route('empresas.empresa_profile.show', ['empresa' => $empresa])->with('success', 'Perfil editado com sucesso!');
+    }
+
+    public function colaboradoresEmpresa()
+    {
+
+        // Recuperar do banco de dados as informações do usuário logado
+        $empresaId = Auth::user()->empresa_id;
+        $empresa = Empresa::where('id', $empresaId)->get()->first();
+
+        $userId = Auth::user()->id;
+
+        // Recupera os usuários da holding, ordenando o usuário logado como o primeiro
+        $colaboradores = User::where('empresa_id', $empresaId)
+            ->orderByRaw("id = $userId DESC")
+            ->get();
+
+        // Carrega a view
+        return view('empresas.empresa_profile.colaboradores', ['empresa' => $empresa, 'colaboradores' => $colaboradores]);
     }
 }

@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('empresas.layout.admin')
 
 @section('content')
 
@@ -45,10 +45,6 @@
                                 <div class="form-group col-md-6">
                                     <label>Senha: </label>
                                     <input type="password" name="password" id="password" value="{{ old('name') }}" class="form-control">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label>Empresa ID: </label>
-                                    <input type="text" name="empresa_id" id="empresa_id" value="{{ old('name') }}" class="form-control">
                                 </div>
                             </div>
                             

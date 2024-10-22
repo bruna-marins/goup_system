@@ -11,15 +11,21 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
 class UsuarioController extends Controller
 {
     public function indexEmpresa(){
 
-        $usuarios = User::all();
+        // Recuperar do banco de dados as informações do usuário logado
+        $empresaId = Auth::user()->empresa_id;
 
-        return view('empresas.usuario.index', compact('usuarios'));
+        $empresa = Empresa::where('id', $empresaId)->get()->first();
+
+        $usuarios = User::where('empresa_id', $empresaId)->get();
+
+        return view('empresas.usuario.index', compact('usuarios', 'empresa'));
     }
 
 
@@ -35,39 +41,39 @@ class UsuarioController extends Controller
     public function createEmpresa(){
 
         //$roles = Role::pluck('name')->all();
-
         //return view('usuario.create', ['roles' => $roles]);
+
         return view('empresas.usuario.create');
     }
 
 
     public function storeEmpresa(Request $request){
 
+        $empresaId = Auth::user()->empresa_id;
+
         $validated = $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
-            'empresa_id' => 'required',
         ]);
 
         $usuario = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => $validated['password'],
-            'empresa_id' => $request['empresa_id'],
+            'empresa_id' => $empresaId,
         ]);
 
-        return redirect()->route('empresas.usuario.index')->with('success', 'Cadastrado com sucesso!');
+        return redirect()->route('empresas.usuario.index')->with('success', 'Usuário cadastrado com sucesso!');
     }
 
 
     public function editEmpresa(User $usuario){
 
         //$roles = Role::pluck('name')->all();
-
         //$usuarioRoles = $usuario->roles->pluck('name')->first();
-
         //return view('usuario.edit', ['usuario' => $usuario, 'roles' => $roles, 'usuarioRoles' => $usuarioRoles]);
+
         return view('empresas.usuario.edit', ['usuario' => $usuario]);
 
     }
@@ -75,14 +81,16 @@ class UsuarioController extends Controller
 
     public function updateEmpresa(Request $request, User $usuario){
 
-        $validatedData = $request->validate([
+        $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email',
         ]);
 
         // Atualiza os dados do usuário
-        $usuario->name = $validatedData['name'];
-        $usuario->email = $validatedData['email'];
+        $usuario->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
 
         return redirect()->route('empresas.usuario.show', ['usuario' => $request->usuario])->with('success', 'Usuário editado!');
     }
@@ -94,7 +102,7 @@ class UsuarioController extends Controller
         $usuario = User::where('id', Auth::id())->first();
 
         // Carrega a view
-        return view('empresas.profile.edit-password', ['user' => $usuario]);
+        return view('empresas.usuario.edit-password', ['user' => $usuario]);
     }
 
 
@@ -103,20 +111,28 @@ class UsuarioController extends Controller
         // Recuperar do banco de dados as informações do usuário logado
         $usuario = User::where('id', Auth::id())->first();
 
+
         // Validar o upload
         $request->validate([
+            'senha_atual' => 'required',
             'password' => 'required|min:6',
-        ],[
-            'password.required' => 'Campo senha é obrigatório!',
+        ], [
+            'senha_atual.required' => 'Você precisa informar sua senha atual.',
+            'nova_senha.required' => 'Você precisa informar uma nova senha.',
             'password.min' => 'A senha deve conter no mínimo :min caracteres.'
         ]);
 
+        // Verifica se a senha atual está correta
+        if (!Hash::check($request->senha_atual, Auth::user()->password)) {
+            return back()->withErrors(['senha_atual' => 'A senha atual está incorreta.']);
+        }
+
         // Editar as informações no banco de dados
-        $usuario->updateEmpresa([
+        $usuario->update([
             'password' => $request->password,
         ]);
 
-        return redirect()->route('empresas.usuario.show', ['usuario' => $request->usuario])->with('success', 'Senha atualizada com sucesso!');
+        return redirect()->route('empresas.usuario.show', ['usuario' => $usuario->id])->with('success', 'Senha atualizada com sucesso!');
     }
 
 

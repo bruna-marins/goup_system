@@ -4,10 +4,10 @@
     <x-alert />
     <div class="container mt-5">
         <h2>Editar Senha</h2>
-        <form action="{{ route('empresas.usuario.update-password', $user->id) }}" method="POST">
+        <form action="{{ route('empresas.profile.update-password') }}" method="POST">
             @csrf
             @method('PUT')
-            
+
             <label for="senha_atual">Senha Atual</label>
             <input type="password" name="senha_atual" id="senha_atual" class="form-control">
 
@@ -15,7 +15,7 @@
                 <label for="password" class="form-label">Senha</label>
                 <input type="password" class="form-control" id="password" name="password">
             </div>
-            <!-- Botão para Salvar -->
+
             <button type="submit" class="btn btn-primary">Salvar Alterações</button>
         </form>
     </div>

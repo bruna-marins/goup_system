@@ -100,13 +100,20 @@ Route::group(['middleware' => 'auth:web,holding'], function () {
     Route::put('/empresas/update-usuario-password/{usuario}', [UsuarioController::class, 'updatePasswordEmpresa'])->name('empresas.usuario.update-password');
     Route::delete('/empresas/destroy-usuario/{usuario}', [UsuarioController::class, 'destroyEmpresa'])->name('empresas.usuario.destroy');
 
+    // Perfil
+    Route::get('/empresas/show-profile', [ProfileController::class, 'showEmpresa'])->name('empresas.profile.show');
+    Route::get('/empresas/edit-profile', [ProfileController::class, 'editEmpresa'])->name('empresas.profile.edit');
+    Route::put('/empresas/update-profile', [ProfileController::class, 'updateEmpresa'])->name('empresas.profile.update');
+    Route::get('/empresas/edit-profile-foto', [ProfileController::class, 'editFotoEmpresa'])->name('empresas.profile.edit-foto');
+    Route::put('/empresas/update-profile-foto', [ProfileController::class, 'updateFotoEmpresa'])->name('empresas.profile.update-foto');
+    Route::get('/empresas/edit-profile-password', [ProfileController::class, 'editPasswordEmpresa'])->name('empresas.profile.edit-password');
+    Route::put('/empresas/update-profile-password', [ProfileController::class, 'updatePasswordEmpresa'])->name('empresas.profile.update-password');
+
     // Perfil Empresa
-    Route::get('/empresas/show-profile-empresa', [EmpresaPerfilController::class, 'show'])->name('empresas.empresa_profile.show');
-    Route::get('/empresas/edit-profile-empresa', [EmpresaPerfilController::class, 'edit'])->name('empresas.empresa_profile.edit');
-    Route::put('/empresas/update-profile-empresa', [EmpresaPerfilController::class, 'update'])->name('empresas.empresa_profile.update');
-    Route::get('/empresas/edit-profile-logo', [EmpresaPerfilController::class, 'editLogo'])->name('empresas.empresa_profile.edit-logo');
-    Route::put('/empresas/update-profile-logo', [EmpresaPerfilController::class, 'updateLogo'])->name('empresas.empresa_profile.update-logo');
-    Route::get('/empresas/show-colaboradores-empresa', [EmpresaPerfilController::class, 'colaboradores'])->name('empresas.empresa_profile.colaboradores');
+    Route::get('/empresas/show-profile-empresa', [EmpresaPerfilController::class, 'showEmpresa'])->name('empresas.empresa_profile.show');
+    Route::get('/empresas/edit-profile-empresa', [EmpresaPerfilController::class, 'editEmpresa'])->name('empresas.empresa_profile.edit');
+    Route::put('/empresas/update-profile-empresa', [EmpresaPerfilController::class, 'updateEmpresa'])->name('empresas.empresa_profile.update');
+    Route::get('/empresas/show-colaboradores-empresa', [EmpresaPerfilController::class, 'colaboradoresEmpresa'])->name('empresas.empresa_profile.colaboradores');
 
     // Agenda
     Route::get('/empresas/agenda', [TarefaController::class, 'index'])->name('empresas.tarefa.index');
