@@ -23,6 +23,26 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <!-- endinject -->
     <link href="{{ asset('assets/images/favicon.ico') }}" rel="stylesheet">
+
+    <style>
+        .position-relative {
+            position: relative; /* Define o pai como relativo */
+        }
+    
+        .toggle-password {
+            position: absolute; /* Para ser posicionado em relação ao pai */
+            top: 50%; /* Centraliza verticalmente no input */
+            right: 15px; /* Distância da borda direita do campo de input */
+            transform: translateY(-50%); /* Ajuste fino para centralizar melhor verticalmente */
+            cursor: pointer; /* Para indicar que o ícone é clicável */
+            color: #6c757d; /* Cor do ícone */
+        }
+    
+        .form-control {
+            padding-right: 2.5rem; /* Cria espaço suficiente para o ícone à direita */
+        }
+    </style>
+
 </head>
 
 <body>
@@ -47,9 +67,11 @@
                                     <input type="email" class="form-control form-control-lg" id="email"
                                         name="email" placeholder="E-mail" value="{{ old('email') }}">
                                 </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control form-control-lg" id="password"
+                                <div class="form-group position-relative">
+                                    <input type="password" class="form-control form-control-lg pr-5" id="password"
                                         name="password" placeholder="Senha">
+                                    <i class="fas fa-eye position-absolute toggle-password" id="togglePassword"
+                                        onclick="togglePassword()"></i>
                                 </div>
                                 <div class="mt-3 d-grid gap-2">
                                     <button class="btn btn-block btn-primary btn-lg fw-medium auth-form-btn"
@@ -115,6 +137,22 @@
     <script src="{{ asset('js/dashboard.js') }}"></script>
     <!-- End custom js for this page-->
 
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('togglePassword');
+    
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        }
+    </script>
 
 </body>
 

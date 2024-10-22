@@ -36,6 +36,7 @@ Route::group(['middleware' => 'auth:web,holding'], function () {
     Route::get('/holdings/edit-holding/{holding}', [HoldingController::class, 'edit'])->name('holdings.holding.edit');
     Route::put('/holdings/update-holding/{holding}', [HoldingController::class, 'update'])->name('holdings.holding.update');
     Route::delete('/holdings/destroy-holding/{holding}', [HoldingController::class, 'destroy'])->name('holdings.holding.destroy');
+    Route::get('/holdings/show-empresa/{holding}/{empresa}', [HoldingController::class, 'showEmpresa'])->name('holdings.holding.show-empresa');
 
     // Usuário
     Route::get('/holdings/index-usuario', [HoldingUserController::class, 'indexHolding'])->name('holdings.usuario.index');
@@ -79,15 +80,6 @@ Route::group(['middleware' => 'auth:web,holding'], function () {
 
     // Dashboard
     Route::get('/empresas/dashboard', [DashboardController::class, 'empresaDashboard'])->name('empresas.dashboard.dashboard');
-
-    // Empresas
-    Route::get('/empresas/index-empresa', [EmpresaController::class, 'index'])->name('empresas.empresa.index');
-    Route::get('/empresas/show-empresa/{empresa}', [EmpresaController::class, 'show'])->name('empresas.empresa.show');
-    Route::get('/empresas/create-empresa', [EmpresaController::class, 'create'])->name('empresas.empresa.create');
-    Route::post('/empresas/store-empresa', [EmpresaController::class, 'store'])->name('empresas.empresa.store');
-    Route::get('/empresas/edit-empresa/{empresa}', [EmpresaController::class, 'edit'])->name('empresas.empresa.edit');
-    Route::put('/empresas/update-empresa/{empresa}', [EmpresaController::class, 'update'])->name('empresas.empresa.update');
-    Route::delete('/empresas/destroy-empresa/{empresa}', [EmpresaController::class, 'destroy'])->name('empresas.empresa.destroy');
 
     // Usuário
     Route::get('/empresas/index-usuario', [UsuarioController::class, 'indexEmpresa'])->name('empresas.usuario.index');

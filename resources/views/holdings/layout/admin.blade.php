@@ -230,7 +230,7 @@
                         <div class="collapse" id="ui-basic">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link"
-                                        href="../../pages/ui-features/buttons.html">Holdings</a></li>
+                                        href="{{ route('holdings.holding.index') }}">Holdings</a></li>
                                 <li class="nav-item"> <a class="nav-link"
                                         href="{{ route('holdings.clientes.index') }}">Empresas</a></li>
                             </ul>

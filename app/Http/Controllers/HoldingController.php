@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Empresa;
 use App\Models\Holding;
 use Illuminate\Http\Request;
 
@@ -56,5 +57,21 @@ class HoldingController extends Controller
         dd($request);
 
         return;
+    }
+
+    public function showEmpresa($holding_id, $empresa_id)
+    {
+        // Buscar a holding pelo ID
+        $holding = Holding::findOrFail($holding_id);
+
+        // Verificar se a empresa pertence à holding
+        $empresa = Empresa::where('id', $empresa_id)
+            ->where('holding_id', $holding_id)
+            ->firstOrFail();
+
+        $colaboradores = Empresa::with('usuarios')->findOrFail($empresa_id);
+
+        // Retornar a view com os dados da holding e da empresa
+        return view('holdings.holding.show-empresa', compact('holding', 'empresa', 'colaboradores'));
     }
 }
