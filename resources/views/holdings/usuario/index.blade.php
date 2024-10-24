@@ -27,18 +27,13 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <!-- se precisar de topo no card
-                            <div class="card-header">
-                                <div class="card-title">Listar Produtos</div>
-                            </div>
-                            se precisar de topo no card -->
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-12 col-lg-12">
                                 <!--Inserir o COnteudo da página -->
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered table-hover mt-3">
-                                        <thead class="thead-dark">
+                                        <thead class="table-dark">
                                             <tr>
                                                 <th scope="col">Foto</th>
                                                 <th scope="col">Nome</th>

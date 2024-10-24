@@ -2,67 +2,72 @@
 
 @section('content')
 
-<div class="col-12 grid-margin stretch-card">
-    <div class="card">
-        <div class="card-body">
-            <!-- topo da página -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center py-2">
-                        <h1 class="card-title mb-2 mb-md-0">Lista de Holdings</h1>
-                        <a href="{{ route('holdings.holding.create') }}" class="btn btn-inverse-info btn-sm"title="Cadastrar Nova Holding">
-                            <i class="fa-solid fa-plus btn-icon-prepend"></i>
-                            Nova Holding
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <!-- topo da página -->
+<!-- Cabeçalho -->
+<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+    <div>
+        <h3 class="fw-bold mb-3">Lista de Holdings</h3>
+    </div>
+    <!-- botao -->
+    <div class="ms-md-auto py-2 py-md-0">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <a href="{{ route('holdings.holding.create') }}" class="btn btn btn-secondary btn-sm" title="Cadastrar Nova Holding">
+                <i class="fa-solid fa-plus"></i>
+            </a>
+        </div>
+    </div>
+    <!-- botao -->
+</div>
+<!-- Cabeçalho -->
 
-        
-            <div class="row">
-                <div class="col-md-12">
-                    <!--tabela -->
-                    <div class="table-responsive pt-3">
-                        <table class="table table-striped project-orders-table table-hover">
-                            <thead>
-                                <tr>
-                                    <th class="ms-5">ID</th>
-                                    <th>Nome</th>
-                                    <th>CNPJ</th>
-                                    <th>Endereço</th>
-                                    <th>Telefone</th>
-                                    <th style="width: 100px;">Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse($holdings as $holding)
+<!-- COnteudo -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                    <!--Inserir o COnteudo da página -->
+                        <div class="table-responsive">
+                            <table class="table table-striped table-bordered table-hover mt-3">
+                                <thead class="table-dark">
                                     <tr>
-                                        <td>{{ $holding->id }}</td>
-                                        <td>{{ $holding->nome }}</td>
-                                        <td>{{ $holding->cnpj }}</td>
-                                        <td>{{ $holding->endereco }}</td>
-                                        <td>{{ $holding->telefone }}</td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <a href="{{ route('holdings.holding.edit', $holding->id) }}" class="btn btn-inverse-info btn-sm btn-icon-text me-3" title="Editar Holding">
-                                                    <i class="fa-solid fa-edit btn-icon-append"></i>                          
-                                                </a>
-                                                <a href="{{ route('holdings.holding.show', $holding->id) }}" class="btn btn-inverse-info btn-sm btn-icon-text  me-3" title="Detalhes">
-                                                    <i class="fa-regular fa-eye"></i>
-                                                </a>
-                                            </div>
-                                        </td>
+                                        <th class="ms-5">ID</th>
+                                        <th>Empresa</th>
+                                        <th>CNPJ</th>
+                                        <th>Endereço</th>
+                                        <th>Telefone</th>
+                                        <th style="width: 100px;">Ações</th>
                                     </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse($holdings as $holding)
+                                        <tr>
+                                            <td>{{ $holding->id }}</td>
+                                            <td>{{ $holding->nome }}</td>
+                                            <td>{{ $holding->cnpj }}</td>
+                                            <td>{{ $holding->endereco }}</td>
+                                            <td>{{ $holding->telefone }}</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <a href="{{ route('holdings.holding.edit', $holding->id) }}" class="btn  btn-secondary btn-sm btn-icon-text me-3" title="Editar Holding">
+                                                        <i class="fa-solid fa-edit btn-icon-append"></i>                          
+                                                    </a>
+                                                    <a href="{{ route('holdings.holding.show', $holding->id) }}" class="btn  btn-secondary btn-sm btn-icon-text  me-3" title="Detalhes">
+                                                        <i class="fa-regular fa-eye"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
 
-                                @empty
-                                    <p>Nenhuma Empresa Encontrada</p>
-                                @endforelse
-                            </tbody>
-                        </table>
+                                    @empty
+                                        <p>Nenhuma Empresa Encontrada</p>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--tabela -->
+                    <!--Inserir o COnteudo da página -->
                     </div>
-                    <!--tabela -->
-
                 </div>
             </div>
         </div>

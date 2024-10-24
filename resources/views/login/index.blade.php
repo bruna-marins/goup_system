@@ -53,13 +53,12 @@
                     <div class="col-lg-4 mx-auto">
                         <div class="auth-form-light text-start py-5 px-4 px-sm-5">
                             <div class="brand-logo text-center">
-                                <img src="{{ asset('imagens/logo.png') }}" alt="Logo da Empresa">
+                                <img src="{{ asset('imagens/logo2.png') }}" alt="Logo da Empresa">
                             </div>
 
                             <x-alert />
 
                             <form action="{{ route('login.process') }}" method="POST" class="pt-3">
-
                                 @csrf
                                 @method('POST')
 
@@ -74,7 +73,7 @@
                                         onclick="togglePassword()"></i>
                                 </div>
                                 <div class="mt-3 d-grid gap-2">
-                                    <button class="btn btn-block btn-primary btn-lg fw-medium auth-form-btn"
+                                    <button class="btn btn-block btn-secondary btn-lg fw-medium auth-form-btn"
                                         type="submit">Entrar</button>
                                 </div>
                                 <div class="my-2 d-flex justify-content-between align-items-center">

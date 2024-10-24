@@ -61,7 +61,7 @@
                             <a href="{{ route('holdings.profile.edit') }}">
                                 <button class="btn btn-primary"> Editar Perfil</button>
                             </a>
-                            <a href="{{ route('holdings.empresa_profile.show') }}">
+                            <a href="{{ route('holdings.holding_profile.show') }}">
                                 <button class="btn btn-primary">Perfil {{ $holding->nome }}</button>
                             </a>
                             <a href="{{ route('holdings.profile.edit-password') }}">

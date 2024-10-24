@@ -1,46 +1,82 @@
 @extends('holdings.layout.admin')
 
 @section('content')
-    <x-alert />
 
-    <h1>Perfil {{ $empresa->nome }}</h1>
+<x-alert />
 
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-12">
-                <!-- Informações do Usuário -->
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Informações {{ $empresa->nome }}</h4>
-                    </div>
-                    <div class="card-body">
-                        <form>
-                            <label class="form-label">Nome</label>
-                            <input type="text" class="form-control" id="name" value="{{ $empresa->nome }}" readonly>
+<!-- Cabeçalho -->
+<div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+    <div>
+        <h3 class="fw-bold mb-3">Perfil da Empresa - <strong> {{ $empresa->nome }}</strong></h3>
+    </div>
+</div>
+<!-- Cabeçalho -->
 
-                            <label class="form-label">CNPJ</label>
-                            <input type="text" class="form-control" id="email" value="{{ $empresa->cnpj }}" readonly>
+<!-- COnteudo -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 col-lg-12">
+                    <!--Inserir o COnteudo da página -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p><strong>Nome Fantasia:</strong><br /> {{ $empresa->nome }} </p>
+                                <p><strong>Inscrição Estadual:</strong><br /> {{ $empresa->nome }} </p>
+                                <p><strong>E-mail Corporativo:</strong><br /> {{ $empresa->email }} </p>
+                                <p><strong>Endereço:</strong> <br />{{ $empresa->endereco }} </p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><strong>CNPJ:</strong><br /> {{ $empresa->cnpj }} </p>
+                                <p><strong>Inscrição Municipal:</strong><br /> {{ $empresa->nome}} </p>
+                                <p><strong>Site:</strong><br /> {{ $empresa->email }} </p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><strong>Data de Abertura:</strong><br /> {{ $empresa->nome }} </p>
+                                <p><strong>Natureza Jurídica:</strong><br /> {{ $empresa->nome }} </p>
+                                <p><strong>Telefone:</strong> <br />{{ $empresa->telefone }} </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p><strong>Nome do Sócio/Proprietário:</strong><br /> {{ $empresa->email }} </p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><strong>CPF:</strong><br /> {{ $empresa->email }} </p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><strong>Participação Societária:</strong> <br />{{ $empresa->email }} </p>
+                            </div>
+                        </div>
 
-                            <label for="role" class="form-label">E-mail</label>
-                            <input type="email" class="form-control" id="role" value="{{ $empresa->email }}"
-                                readonly>
-
-                            <label class="form-label">telefone</label>
-                            <input type="text" class="form-control" id="role" value="{{ $empresa->telefone }}"
-                                readonly>
-
-                            <label class="form-label">Colaboradores</label>
-                            <input type="text" class="form-control" id="email"
-                                value="{{ $colaboradores->usuarios->count() }}" readonly>
-
-
-                            <label class="form-label">Endereço</label>
-                            <input type="text" class="form-control" id="cep"
-                                value="{{ $empresa->endereco }}"readonly>
-                        </form>
+                        <div class="row pt-3">
+                            <div class="form-group col-md-12">
+                                <h4>Informações Financeiras e Fiscais</h4> <hr />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p><strong>Regime Tributário:</strong><br /> {{ $empresa->email }} </p>
+                                <p><strong>Faturamento Anual:</strong><br /> {{ $empresa->email }} </p>
+                                <p><strong>Código de Tributação:</strong><br /> {{ $empresa->email }} </p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><strong>CNAE:</strong><br /> {{ $empresa->email }} </p>
+                                <p><strong>Responsável Contábil:</strong><br /> {{ $empresa->email }} </p>
+                                <p><strong>Alíquotas Fiscais:</strong><br /> {{ $empresa->email }} </p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><strong>Capital Social:</strong><br /> {{ $empresa->email }} </p>
+                                <p><strong>Cargo/Função:</strong><br /> {{ $empresa->email }} </p>
+                            </div>
+                        </div>
+                    <!--Inserir o COnteudo da página -->
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 @endsection
+
