@@ -123,7 +123,7 @@ class ProfileController extends Controller
             'password' => 'required|min:6',
         ], [
             'senha_atual.required' => 'Você precisa informar sua senha atual.',
-            'nova_senha.required' => 'Você precisa informar uma nova senha.',
+            'password.required' => 'Você precisa informar uma nova senha.',
             'password.min' => 'A senha deve conter no mínimo :min caracteres.'
         ]);
 
