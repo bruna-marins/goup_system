@@ -6,6 +6,7 @@ use App\Models\HoldingUser;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Faker\Factory as Faker;
 use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
@@ -15,39 +16,34 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+
+        $faker = Faker::create('pt_BR');
+
         if (!User::where('email', 'natan@teste.com.br')->first()) {
             HoldingUser::create([
                 'name' => 'Natan',
                 'email' => 'natan@teste.com.br',
                 'password' => Hash::make('123456a', ['rounds' => 12]),
+                'nome_completo' => 'Natan Barbosa de Marins',
+                'data_nascimento' => $faker->date,
+                'telefone' => '21969726974',
+                'cargo' => 'Presidente',
+                'departamento' => 'Executivo',
                 'holding_id' => 1
             ]);
         }
         
         if (!User::where('email', 'manu@teste.com.br')->first()) {
-            HoldingUser::create([
+            User::create([
                 'name' => 'Manu',
                 'email' => 'manu@teste.com.br',
                 'password' => Hash::make('123456a', ['rounds' => 12]),
-                'holding_id' => 4
-            ]);
-        }
-        
-        if (!User::where('email', 'bruna@teste.com.br')->first()) {
-            User::create([
-                'name' => 'Bruna',
-                'email' => 'bruna@teste.com.br',
-                'password' => Hash::make('123456a', ['rounds' => 12]),
-                'empresa_id' => 3,
-            ]);
-        }
-        
-        if (!User::where('email', 'ronaldo@teste.com.br')->first()) {
-            User::create([
-                'name' => 'Ronaldo',
-                'email' => 'ronaldo@teste.com.br',
-                'password' => Hash::make('123456a', ['rounds' => 12]),
-                'empresa_id' => 3,
+                'nome_completo' => 'Emanuele Barbosa de Marins',
+                'data_nascimento' => $faker->date,
+                'telefone' => '21969726974',
+                'cargo' => 'CEO',
+                'departamento' => 'Diretoria',
+                'empresa_id' => 2
             ]);
         }
     }

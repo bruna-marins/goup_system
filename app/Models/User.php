@@ -22,6 +22,13 @@ class User extends Authenticatable
         'password',
         'empresa_id',
         'foto_perfil',
+        'last_login_at',
+        'nome_completo',
+        'data_nascimento',
+        'telefone',
+        'cargo',
+        'departamento',
+        'status',
     ];
 
     /**

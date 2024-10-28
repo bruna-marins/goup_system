@@ -15,9 +15,29 @@ return new class extends Migration
             $table->id(); // ID único para cada holding
             $table->string('nome'); // Nome da holding
             $table->string('cnpj')->unique(); // CNPJ único da holding
-            $table->string('endereco'); // Endereço da holding
             $table->string('telefone'); // Telefone de contato
-            $table->string('email')->unique(); // Email da holding
+            $table->text('site')->nullable();
+            $table->string('email')->unique(); // Email da empresa
+            $table->string('nome_fantasia');
+            $table->date('data_abertura');
+            $table->string('inscricao_municipal');
+            $table->string('cep');
+            $table->string('logradouro');
+            $table->string('numero');
+            $table->string('bairro');
+            $table->string('cidade');
+            $table->string('estado');
+            $table->text('complemento')->nullable();
+            $table->string('cnae');
+            $table->string('capital_social');
+            $table->string('faturamento_anual');
+            $table->string('responsavel_contabil');
+            $table->string('codigo_tributacao');
+            $table->string('aliquota_fiscais');
+            $table->string('socio');
+            $table->string('cpf');
+            $table->string('participacao_societaria');
+            $table->string('cargo');
             $table->timestamps(); // Timestamps (created_at, updated_at)
         });
     }

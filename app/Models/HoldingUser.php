@@ -19,6 +19,13 @@ class HoldingUser extends Authenticatable
         'password',
         'holding_id',
         'foto_perfil',
+        'last_login_at',
+        'nome_completo',
+        'data_nascimento',
+        'telefone',
+        'cargo',
+        'departamento',
+        'status',
     ];
 
     // Relacionamento com a tabela holdings
