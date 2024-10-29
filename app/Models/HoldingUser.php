@@ -26,6 +26,7 @@ class HoldingUser extends Authenticatable
         'cargo',
         'departamento',
         'status',
+        'cpf',
     ];
 
     // Relacionamento com a tabela holdings

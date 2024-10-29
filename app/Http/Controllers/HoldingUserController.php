@@ -37,50 +37,80 @@ class HoldingUserController extends Controller
 
     public function createHolding()
     {
+        $usuario = Auth::user();
 
-        return view('holdings.usuario.create');
+        return view('holdings.usuario.create', compact('usuario'));
     }
 
     public function storeHolding(Request $request)
     {
-
         $holdingId = Auth::user()->holding_id;
 
         $validated = $request->validate([
+            'nome_completo' => 'required',
+            'cpf' => 'required',
+            'data_nascimento' => 'required',
+            'telefone' => 'required',
             'name' => 'required',
             'email' => 'required|email|unique:users',
+            'cargo' => 'required',
+            'departamento' => 'required',
             'password' => 'required|min:6',
         ]);
 
         $usuario = HoldingUser::create([
+            'nome_completo' => $validated['nome_completo'],
+            'cpf' => $validated['cpf'],
+            'data_nascimento' => $validated['data_nascimento'],
+            'telefone' => $validated['telefone'],
+            'cargo' => $validated['cargo'],
+            'departamento' => $validated['departamento'],
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => $validated['password'],
             'holding_id' => $holdingId,
         ]);
 
-        return redirect()->route('holdings.usuario.index')->with('success', 'Cadastrado com sucesso!');
+        $usuario->status = $request->input('status');
+        $usuario->save();
+
+        return redirect()->route('holdings.usuario.show', ['usuario' => $request->usuario])->with('success', 'Cadastrado com sucesso!');
     }
 
-    public function editHolding(HoldingUser $usuario)
+    public function editHolding($usuario)
     {
+        $user = HoldingUser::where('id', $usuario)->get()->first();
 
-        return view('holdings.usuario.edit', ['usuario' => $usuario]);
+        return view('holdings.usuario.edit', ['usuario' => $user]);
     }
 
     public function updateHolding(Request $request, HoldingUser $usuario)
     {
-
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email',
+        $validated = $request->validate([
+            'nome_completo' => 'required',
+            'cpf' => 'required',
+            'data_nascimento' => 'required',
+            'telefone' => 'required',
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'cargo' => 'required',
+            'departamento' => 'required',
         ]);
 
         // Atualiza os dados do usuário
         $usuario->update([
-            'name' => $request->name,
-            'email' => $request->email,
+            'nome_completo' => $validated['nome_completo'],
+            'cpf' => $validated['cpf'],
+            'data_nascimento' => $validated['data_nascimento'],
+            'telefone' => $validated['telefone'],
+            'cargo' => $validated['cargo'],
+            'departamento' => $validated['departamento'],
+            'name' => $validated['name'],
+            'email' => $validated['email'],
         ]);
+
+        $usuario->status = $request->input('status');
+        $usuario->save();
 
         return redirect()->route('holdings.usuario.show', ['usuario' => $request->usuario])->with('success', 'Usuário editado!');
     }

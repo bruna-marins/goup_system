@@ -61,6 +61,7 @@ class HoldingSeeder extends Seeder
                     'password' => Hash::make('password'), // senha padrão
                     'holding_id' => $holding->id,
                     'nome_completo' => $faker->name,
+                    'cpf' => $faker->cpf,
                     'data_nascimento' => $faker->date,
                     'telefone' => $faker->phoneNumber,
                     'cargo' => $faker->jobTitle,
@@ -109,6 +110,7 @@ class HoldingSeeder extends Seeder
                         'password' => Hash::make('password'), // senha padrão
                         'empresa_id' => $empresa->id,
                         'nome_completo' => $faker->name,
+                        'cpf' => $faker->cpf,
                         'data_nascimento' => $faker->date,
                         'telefone' => $faker->phoneNumber,
                         'cargo' => $faker->jobTitle,

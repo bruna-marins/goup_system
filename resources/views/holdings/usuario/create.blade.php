@@ -33,42 +33,42 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label>Nome Completo </label>
-                                <input type="text" name="name" id="name" value="{{ old('name') }}"
+                                <input type="text" name="nome_completo" id="nome_completo" value="{{ old('nome_completo') }}"
                                     class="form-control">
                             </div>
 
                             <div class="form-group col-md-2">
                                 <label>CPF </label>
-                                <input type="text" name="cpf" id="cpf" value="{{ old('name') }}"
+                                <input type="text" name="cpf" id="cpf" value="{{ old('cpf') }}"
                                     class="form-control">
                             </div>
                         
                             <div class="form-group col-md-2">
                                 <label>Data de Nascimento </label>
-                                <input type="date" name="nascimento" id="nascimento" value="{{ old('name') }}"
+                                <input type="date" name="data_nascimento" id="data_nascimento" value="{{ old('data_nascimento') }}"
                                     class="form-control">
                             </div>
 
                             <div class="form-group col-md-2">
                                 <label>Telefone </label>
-                                <input type="text" name="telefone" id="telefone" value="{{ old('name') }}"
+                                <input type="text" name="telefone" id="telefone" value="{{ old('telefone') }}"
                                     class="form-control">
                             </div>
 
                             <div class="form-group col-md-4">
                                 <label>E-mail </label>
-                                <input type="text" name="email" id="email" value="{{ old('name') }}"
+                                <input type="text" name="email" id="email" value="{{ old('email') }}"
                                     class="form-control">
                             </div>                            
                         
                             <div class="form-group col-md-4">
                                 <label>Cargo/Função </label>
-                                <input type="text" name="cargo" id="cargo" value="{{ old('name') }}"
+                                <input type="text" name="cargo" id="cargo" value="{{ old('cargo') }}"
                                     class="form-control">
                             </div>
                             <div class="form-group col-md-4">
                                 <label>Departamento </label>
-                                <input type="text" name="departamento" id="departamento" value="{{ old('name') }}"
+                                <input type="text" name="departamento" id="departamento" value="{{ old('departamento') }}"
                                     class="form-control">
                             </div>                                                        
                         </div>
@@ -80,13 +80,13 @@
                         <div class="row">
                             <div class="form-group col-md-3">
                                 <label>Nome de Usuário </label>
-                                <input type="password" name="password" id="password" value="{{ old('name') }}"
+                                <input type="text" name="name" id="name" value="{{ old('name') }}"
                                     class="form-control">
                             </div>
                         
                             <div class="form-group col-md-3">
                                 <label>Senha </label>
-                                <input type="password" name="password" id="password" value="{{ old('name') }}"
+                                <input type="password" name="password" id="password" value="{{ old('password') }}"
                                     class="form-control">
                             </div>
 
@@ -101,9 +101,9 @@
                             </div> 
                             <div class="form-group col-md-3">
                                 <label>Status da Conta</label>
-                                <select class="form-select" aria-label="Default select example">
-                                    <option value="1">Ativo</option>
-                                    <option value="2"> Inativor</option>
+                                <select name="status" id="status" class="form-select" aria-label="Default select example">
+                                    <option value="0" {{ $usuario->status ? 'selected' : '' }}>Inativo</option>
+                                    <option value="1" {{ $usuario->status ? 'selected' : '' }}>Ativo</option>                                  
                                 </select>
                             </div>                                                         
                         </div>

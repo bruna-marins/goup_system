@@ -24,6 +24,12 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label>Nome Completo </label>
+                                <input type="text" name="nome_completo" id="nome_completo"
+                                    value="{{ old('nome_completo', $usuario->nome_completo) }}" class="form-control">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label>Nome Usuário</label>
                                 <input type="text" name="name" id="name"
                                     value="{{ old('name', $usuario->name) }}" class="form-control">
                             </div>
@@ -31,19 +37,19 @@
                             <div class="form-group col-md-2">
                                 <label>CPF </label>
                                 <input type="text" name="cpf" id="cpf"
-                                    value="{{ old('cpf', $usuario->name) }}" class="form-control">
+                                    value="{{ old('cpf', $usuario->cpf) }}" class="form-control">
                             </div>
                         
                             <div class="form-group col-md-2">
                                 <label>Data de Nascimento </label>
-                                <input type="text" name="nascimento" id="nascimento"
-                                    value="{{ old('nascimento', $usuario->name) }}" class="form-control">
+                                <input type="text" name="data_nascimento" id="data_nascimento"
+                                    value="{{ old('data_nascimento', $usuario->data_nascimento) }}" class="form-control">
                             </div>
 
                             <div class="form-group col-md-2">
                                 <label>Telefone </label>
                                 <input type="text" name="telefone" id="telefone"
-                                    value="{{ old('telefone', $usuario->name) }}" class="form-control">
+                                    value="{{ old('telefone', $usuario->telefone) }}" class="form-control">
                             </div>
 
                             <div class="form-group col-md-4">
@@ -55,13 +61,20 @@
                             <div class="form-group col-md-4">
                                 <label>Cargo/Função </label>
                                 <input type="text" name="cargo" id="cargo"
-                                    value="{{ old('cargo', $usuario->name) }}" class="form-control">
+                                    value="{{ old('cargo', $usuario->cargo) }}" class="form-control">
                             </div>
                             <div class="form-group col-md-4">
                                 <label>Departamento </label>
                                 <input type="text" name="departamento" id="departamento"
-                                    value="{{ old('departamento', $usuario->name) }}" class="form-control">
-                            </div>                                                        
+                                    value="{{ old('departamento', $usuario->departamento) }}" class="form-control">
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label>Status da Conta</label>
+                                <select name="status" id="status" class="form-control" aria-label="Default select example">
+                                    <option value="0" {{ $usuario->status ? 'selected' : '' }}>Inativo</option>
+                                    <option value="1" {{ $usuario->status ? 'selected' : '' }}>Ativo</option>                                  
+                                </select>
+                            </div>                                                    
                         </div>
 
                         <div class="row pt-4">

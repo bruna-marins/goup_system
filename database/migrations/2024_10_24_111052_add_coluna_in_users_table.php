@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('nome_completo');
+            $table->string('cpf');
             $table->date('data_nascimento');
             $table->string('telefone');
             $table->string('cargo');
@@ -28,6 +29,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('nome_completo');
+            $table->dropColumn('cpf');
             $table->dropColumn('data_nascimento');
             $table->dropColumn('telefone');
             $table->dropColumn('cargo');
