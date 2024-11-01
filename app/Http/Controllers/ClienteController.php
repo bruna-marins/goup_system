@@ -49,7 +49,7 @@ class ClienteController extends Controller
             'telefone' => 'required'
         ]);
 
-        $usuario = Empresa::create([
+        Empresa::create([
             'nome' => $request->nome, 
             'email' => $request->email,
             'cnpj' => $request->cnpj,

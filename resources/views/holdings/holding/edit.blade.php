@@ -16,6 +16,9 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-12 col-lg-12">
+
+                            <x-alert/>
+
                             <!--Inserir o COnteudo da página -->
                             <form class="forms-sample" action="{{ route('holdings.holding.update', $holding->id) }}"
                                 method="POST">

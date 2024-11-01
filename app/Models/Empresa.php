@@ -66,4 +66,9 @@ class Empresa extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public function tomadoresServicos()
+    {
+        return $this->hasMany(TomadorServico::class);
+    }
 }
