@@ -7,6 +7,8 @@
             <div class="card-body">
                 <h1 class="card-title">Cadastrar Novo Cliente</h1>
 
+                <x-alert/>
+
                 <form class="forms-sample" action="{{ route('holdings.clientes.store') }}" method="POST">
                     @csrf
                     @method('POST')
