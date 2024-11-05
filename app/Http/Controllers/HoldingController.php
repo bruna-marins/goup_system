@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Empresa;
 use App\Models\Holding;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 
 class HoldingController extends Controller
@@ -192,5 +193,18 @@ class HoldingController extends Controller
 
         // Retornar a view com os dados da holding e da empresa
         return view('holdings.holding.show-empresa', compact('holding', 'empresa', 'colaboradores'));
+    }
+
+    public function gerarPdf($holding_id)
+    {
+        // Buscar a holding pelo ID
+        $holding = Holding::findOrFail($holding_id);
+
+
+        // Renderiza uma view e passa os dados dos tomadores de serviço para o PDF
+        $pdf = Pdf::loadView('holdings.holding.pdf-dados', compact('holding'));
+
+        // Baixar o PDF
+        return $pdf->download('holdingDados.pdf');
     }
 }

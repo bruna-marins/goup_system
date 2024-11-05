@@ -55,6 +55,9 @@
                                                     <a href="{{ route('holdings.holding.show', $holding->id) }}" class="btn  btn-secondary btn-sm btn-icon-text  me-3" title="Detalhes">
                                                         <i class="fa-regular fa-eye"></i>
                                                     </a>
+                                                    <a href="{{ route('holdings.holding.pdf-dados', $holding->id) }}" class="btn  btn-secondary btn-sm btn-icon-text  me-3" title="Gerar pdf">
+                                                        <i class="fa-regular fa-file"></i>
+                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>

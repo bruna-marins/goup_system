@@ -195,9 +195,17 @@
                 <ul class="nav">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('empresas.dashboard.dashboard') }}">
+                            
                             <i class="fa-solid fa-chart-line espaco menu-icon" style="color:#FF914D;"></i>
                             <span class="menu-title">Dashboard</span>
-                            <div class="badge badge-danger">new</div>
+                            <!-- <div class="badge badge-danger">new</div> -->
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('empresas.cliente.index') }}">
+                            <i class="fa-regular fa-building espaco menu-icon" style="color:#FF914D;"></i>
+                            <span class="menu-title">Clientes</span>
                         </a>
                     </li>
 
@@ -222,17 +230,17 @@
                         <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
                             aria-controls="ui-basic">
                             <i class="fa-regular fa-folder espaco menu-icon" style="color:#FF914D;"></i>
-                            <span class="menu-title">UI Elements</span>
+                            <span class="menu-title">Drop</span>
                             <i class="menu-arrow"></i>
                         </a>
                         <div class="collapse" id="ui-basic">
                             <ul class="nav flex-column sub-menu">
                                 <li class="nav-item"> <a class="nav-link"
-                                        href="../../pages/ui-features/buttons.html">Buttons</a></li>
+                                        href="#">Buttons</a></li>
                                 <li class="nav-item"> <a class="nav-link"
-                                        href="../../pages/ui-features/dropdowns.html">Dropdowns</a></li>
+                                        href="#">Dropdowns</a></li>
                                 <li class="nav-item"> <a class="nav-link"
-                                        href="../../pages/ui-features/typography.html">Typography</a></li>
+                                        href="#">Typography</a></li>
                             </ul>
                         </div>
                     </li>

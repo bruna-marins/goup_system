@@ -9,6 +9,7 @@ use App\Http\Controllers\HoldingUserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TarefaController;
+use App\Http\Controllers\TomadorServicoController;
 use App\Http\Controllers\UsuarioController;
 use App\Models\HoldingUser;
 use Illuminate\Support\Facades\Route;
@@ -37,6 +38,7 @@ Route::group(['middleware' => 'auth:web,holding'], function () {
     Route::put('/holdings/update-holding/{holding}', [HoldingController::class, 'update'])->name('holdings.holding.update');
     Route::delete('/holdings/destroy-holding/{holding}', [HoldingController::class, 'destroy'])->name('holdings.holding.destroy');
     Route::get('/holdings/show-empresa/{holding}/{empresa}', [HoldingController::class, 'showEmpresa'])->name('holdings.holding.show-empresa');
+    Route::get('/holdings/pdf-dados{holding}', [HoldingController::class, 'gerarPdf'])->name('holdings.holding.pdf-dados');
 
     // Usuário
     Route::get('/holdings/index-usuario', [HoldingUserController::class, 'indexHolding'])->name('holdings.usuario.index');
@@ -112,4 +114,14 @@ Route::group(['middleware' => 'auth:web,holding'], function () {
     Route::get('/empresas/agenda/create/{data}', [TarefaController::class, 'create'])->name('empresas.tarefa.create');
     Route::post('/empresas/agenda/tarefa', [TarefaController::class, 'store'])->name('empresas.tarefa.store');
     Route::get('/empresas/agenda/tarefas/{data}', [TarefaController::class, 'showTarefas'])->name('empresas.tarefa.show');
+
+    // Clientes
+    Route::get('/empresas/index-cliente-empresa', [TomadorServicoController::class, 'indexEmpresa'])->name('empresas.cliente.index');
+    Route::get('/empresas/show-cliente-empresa/{cliente}', [TomadorServicoController::class, 'showEmpresa'])->name('empresas.cliente.show');
+    Route::get('/empresas/create-cliente-empresa', [TomadorServicoController::class, 'createEmpresa'])->name('empresas.cliente.create');
+    Route::post('/empresas/store-cliente-empresa', [TomadorServicoController::class, 'storeEmpresa'])->name('empresas.cliente.store');
+    Route::get('/empresas/edit-cliente-empresa/{cliente}', [TomadorServicoController::class, 'editEmpresa'])->name('empresas.cliente.edit');
+    Route::put('/empresas/update-cliente-empresa/{cliente}', [TomadorServicoController::class, 'updateEmpresa'])->name('empresas.cliente.update');
+    Route::delete('/empresas/destroy-cliente-empresa/{cliente}', [TomadorServicoController::class, 'destroyEmpresa'])->name('empresas.cliente.destroy');
+    
 });
