@@ -115,13 +115,13 @@ Route::group(['middleware' => 'auth:web,holding'], function () {
     Route::post('/empresas/agenda/tarefa', [TarefaController::class, 'store'])->name('empresas.tarefa.store');
     Route::get('/empresas/agenda/tarefas/{data}', [TarefaController::class, 'showTarefas'])->name('empresas.tarefa.show');
 
-    // Clientes
-    Route::get('/empresas/index-cliente-empresa', [TomadorServicoController::class, 'indexEmpresa'])->name('empresas.cliente.index');
-    Route::get('/empresas/show-cliente-empresa/{cliente}', [TomadorServicoController::class, 'showEmpresa'])->name('empresas.cliente.show');
-    Route::get('/empresas/create-cliente-empresa', [TomadorServicoController::class, 'createEmpresa'])->name('empresas.cliente.create');
-    Route::post('/empresas/store-cliente-empresa', [TomadorServicoController::class, 'storeEmpresa'])->name('empresas.cliente.store');
-    Route::get('/empresas/edit-cliente-empresa/{cliente}', [TomadorServicoController::class, 'editEmpresa'])->name('empresas.cliente.edit');
-    Route::put('/empresas/update-cliente-empresa/{cliente}', [TomadorServicoController::class, 'updateEmpresa'])->name('empresas.cliente.update');
-    Route::delete('/empresas/destroy-cliente-empresa/{cliente}', [TomadorServicoController::class, 'destroyEmpresa'])->name('empresas.cliente.destroy');
+    // Tomador de serviço
+    Route::get('/empresas/index-tomador-servico', [TomadorServicoController::class, 'index'])->name('empresas.cliente.index');
+    Route::get('/empresas/show-tomador-servico/{tomadorservico}', [TomadorServicoController::class, 'show'])->name('empresas.cliente.show');
+    Route::get('/empresas/create-tomador-servico', [TomadorServicoController::class, 'create'])->name('empresas.cliente.create');
+    Route::post('/empresas/store-tomador-servico', [TomadorServicoController::class, 'store'])->name('empresas.cliente.store');
+    Route::get('/empresas/edit-tomador-servico/{tomadorservico}', [TomadorServicoController::class, 'edit'])->name('empresas.cliente.edit');
+    Route::put('/empresas/update-tomador-servico/{tomadorservico}', [TomadorServicoController::class, 'update'])->name('empresas.cliente.update');
+    Route::delete('/empresas/destroy-tomador-servico/{tomadorservico}', [TomadorServicoController::class, 'destroy'])->name('empresas.cliente.destroy');
     
 });

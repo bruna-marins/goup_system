@@ -342,6 +342,54 @@
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    @yield('scripts') <!-- Incluir scripts específicos da página -->
+
+    <!-- jQuery (se ainda não estiver incluído) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- jQuery Mask Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+    <!-- Aplicar a máscara globalmente -->
+    <script>
+        $(document).ready(function() {
+            // Máscara para CNPJ
+            $('#cnpj').mask('00.000.000/0000-00');
+
+            // Máscara para o Telefone (com DDD)
+            $('#telefone').mask('(00) 00000-0000');
+
+            // Máscara para CPF
+            $('#cpf').mask('000.000.000-00');
+        });
+    </script>
+
+    <script>
+        document.getElementById('cep').addEventListener('blur', function() {
+            let cep = this.value.replace(/\D/g, ''); // Remove caracteres não numéricos
+
+            if (cep.length === 8) { // Verifica se o CEP tem 8 dígitos
+                fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!data.erro) {
+                            // Preenche os campos de endereço com os dados retornados
+                            document.getElementById('logradouro').value = data.logradouro;
+                            document.getElementById('bairro').value = data.bairro;
+                            document.getElementById('cidade').value = data.localidade;
+                            document.getElementById('estado').value = data.uf;
+                        } else {
+                            alert('CEP não encontrado.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro ao buscar o CEP:', error);
+                        alert('Erro ao buscar o CEP. Tente novamente.');
+                    });
+            } else {
+                alert('CEP inválido. Digite um CEP com 8 números.');
+            }
+        });
+    </script>
 </body>
 
 </html>
