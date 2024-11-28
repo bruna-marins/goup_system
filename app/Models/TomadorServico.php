@@ -24,17 +24,34 @@ class TomadorServico extends Model
     protected $fillable = [
         'empresa_id',
         'nome',
+        'sobrenome',
         'cnpj',
-        'cpf',
-        'email',
         'telefone',
         'site',
+        'email',
+        'nome_fantasia',
+        'data_abertura',
+        'inscricao_municipal',
+        'cep',
         'logradouro',
+        'numero',
         'bairro',
         'cidade',
         'estado',
-        'cep',
-        'status',
+        'complemento',
+        'cnae',
+        'capital_social',
+        'faturamento_anual',
+        'responsavel_contabil',
+        'codigo_tributacao',
+        'aliquota_fiscais',
+        'socio',
+        'cpf',
+        'participacao_societaria',
+        'cargo',
+        'natureza_juridica',
+        'regime_tributario',
+        'numero',
     ];
 
     /**
@@ -43,6 +60,21 @@ class TomadorServico extends Model
     public function empresa()
     {
         return $this->belongsTo(Empresa::class);
+    }
+
+    public function clientes()
+    {
+        return $this->hasMany(Cliente::class);
+    }
+
+    public function documentos()
+    {
+        return $this->hasMany(Documento::class);
+    }
+
+    public function socios()
+    {
+        return $this->belongsToMany(Socio::class, 'socio_tomador');
     }
 }
 

@@ -9,10 +9,9 @@
                     <div class="col-12">
                         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center py-2">
                             <h1 class="card-title mb-2 mb-md-0">Clientes</h1>
-                            <a href="{{ route('empresas.cliente.create') }}"
-                                class="btn btn-inverse-info btn-sm"title="Cadastrar Nova Holding">
+                            <a href="{{ route('empresas.tomador.create')}}"
+                                class="btn btn-inverse-info btn-sm"title="Cadastrar Novo Tomador de Serviço">
                                 <i class="fa-solid fa-plus btn-icon-prepend"></i>
-                                Novo Clinte
                             </a>
                         </div>
                     </div>
@@ -44,12 +43,12 @@
                                             <td>{{ $cliente->telefone }}</td>
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <a href="{{ route('empresas.cliente.edit', $cliente->id) }}"
+                                                    <a href="{{ route('empresas.tomador.edit', $cliente->id) }}"
                                                         class="btn btn-inverse-info btn-sm btn-icon-text me-3"
                                                         title="Editar clientes">
                                                         <i class="fa-solid fa-edit btn-icon-append"></i>
                                                     </a>
-                                                    <a href="{{ route('empresas.cliente.show', $cliente->id) }}"
+                                                    <a href="{{ route('empresas.tomador.show', $cliente->id) }}"
                                                         class="btn btn-inverse-info btn-sm btn-icon-text  me-3"
                                                         title="Detalhes">
                                                         <i class="fa-regular fa-eye"></i>
@@ -57,15 +56,13 @@
                                                 </div>
                                             </td>
                                         </tr>
-
                                     @empty
-                                        <p>Nenhum cliente Encontrado</p>
+                                        <p>Nenhum Tomador de Serviço Encontrado</p>
                                     @endforelse
                                 </tbody>
                             </table>
                         </div>
                         <!--tabela -->
-
                     </div>
                 </div>
             </div>

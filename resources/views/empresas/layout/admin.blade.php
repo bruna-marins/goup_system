@@ -203,9 +203,9 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('empresas.cliente.index') }}">
+                        <a class="nav-link" href="{{ route('empresas.tomador.index') }}">
                             <i class="fa-regular fa-building espaco menu-icon" style="color:#FF914D;"></i>
-                            <span class="menu-title">Clientes</span>
+                            <span class="menu-title">Tomador</span>
                         </a>
                     </li>
 

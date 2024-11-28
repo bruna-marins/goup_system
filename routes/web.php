@@ -116,12 +116,12 @@ Route::group(['middleware' => 'auth:web,holding'], function () {
     Route::get('/empresas/agenda/tarefas/{data}', [TarefaController::class, 'showTarefas'])->name('empresas.tarefa.show');
 
     // Tomador de serviço
-    Route::get('/empresas/index-tomador-servico', [TomadorServicoController::class, 'index'])->name('empresas.cliente.index');
-    Route::get('/empresas/show-tomador-servico/{tomadorservico}', [TomadorServicoController::class, 'show'])->name('empresas.cliente.show');
-    Route::get('/empresas/create-tomador-servico', [TomadorServicoController::class, 'create'])->name('empresas.cliente.create');
-    Route::post('/empresas/store-tomador-servico', [TomadorServicoController::class, 'store'])->name('empresas.cliente.store');
-    Route::get('/empresas/edit-tomador-servico/{tomadorservico}', [TomadorServicoController::class, 'edit'])->name('empresas.cliente.edit');
-    Route::put('/empresas/update-tomador-servico/{tomadorservico}', [TomadorServicoController::class, 'update'])->name('empresas.cliente.update');
-    Route::delete('/empresas/destroy-tomador-servico/{tomadorservico}', [TomadorServicoController::class, 'destroy'])->name('empresas.cliente.destroy');
-    
+    Route::get('/empresas/index-tomador-servico', [TomadorServicoController::class, 'index'])->name('empresas.tomador.index');
+    Route::get('/empresas/show-tomador-servico/{tomadorservico}', [TomadorServicoController::class, 'show'])->name('empresas.tomador.show');
+    Route::get('/empresas/create-tomador-servico', [TomadorServicoController::class, 'create'])->name('empresas.tomador.create');
+    Route::post('/empresas/store-tomador-servico', [TomadorServicoController::class, 'store'])->name('empresas.tomador.store');
+    Route::get('/empresas/edit-tomador-servico/{tomadorservico}', [TomadorServicoController::class, 'edit'])->name('empresas.tomador.edit');
+    Route::put('/empresas/update-tomador-servico/{tomadorservico}', [TomadorServicoController::class, 'update'])->name('empresas.tomador.update');
+    Route::delete('/empresas/destroy-tomador-servico/{tomadorservico}', [TomadorServicoController::class, 'destroy'])->name('empresas.tomador.destroy');
+
 });

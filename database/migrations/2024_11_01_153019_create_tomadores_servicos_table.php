@@ -15,17 +15,29 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('empresa_id');
             $table->string('nome');
+            $table->string('nome_fantasia');
+            $table->string('razao_social')->nullable();
             $table->string('cnpj')->nullable();
-            $table->string('cpf')->nullable();
             $table->string('email');
             $table->string('telefone');
             $table->string('site')->nullable();
+            $table->string('numero');
             $table->string('logradouro');
             $table->string('bairro');
             $table->string('cidade');
             $table->string('estado');
             $table->string('cep');
+            $table->string('complemento')->nullable();
+            $table->date('data_abertura')->nullable();
+            $table->string('inscricao_municipal')->nullable();
             $table->enum('status', ['ativo', 'inativo'])->default('ativo');
+            $table->enum('natureza_juridica', ['MEI', 'EI', 'Ltda.', 'SS', 'SA', 'SLU'])->default('MEI');
+            $table->enum('regime_tributario', ['Simples Nacional', 'Lucro Presumido', 'Lucro Real'])->default('Simples Nacional');
+            $table->string('cnae')->nullable();
+            $table->string('capital_social')->nullable();
+            $table->string('faturamento_anual')->nullable();
+            $table->string('responsavel_contabil')->nullable();
+            $table->string('aliquotas_fiscais')->nullable();
             $table->timestamps();
 
             // Relacionamento com a tabela empresas
