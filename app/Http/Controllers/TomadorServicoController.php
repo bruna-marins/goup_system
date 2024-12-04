@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\TomadorServico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class TomadorServicoController extends Controller
 {
@@ -32,7 +33,6 @@ class TomadorServicoController extends Controller
             'cnpj' => 'nullable|cnpj',
             'telefone' => 'required',
             'email' => 'required|email',
-            'razao_social' => 'required',
             'data_abertura' => 'nullable',
             'site' => 'nullable|url',
             'inscricao_municipal' => 'nullable',
@@ -91,6 +91,7 @@ class TomadorServicoController extends Controller
             'responsavel_contabil' => $request->responsavel_contabil,
             'codigo_tributacao' => $request->codigo_tributacao,
             'empresa_id' => $empresaId,
+            'password' => Hash::make('123456a', ['rounds' => 12]),
         ]);
 
         return redirect()->route('empresas.tomador.index')->with('success', 'tomador cadastrado com sucesso!');

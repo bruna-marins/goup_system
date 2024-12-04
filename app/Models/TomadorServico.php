@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 
-class TomadorServico extends Model
+class TomadorServico extends Authenticatable
 {
-    use HasFactory;
+    use Notifiable;
 
     /**
      * The table associated with the model.
@@ -52,7 +54,20 @@ class TomadorServico extends Model
         'natureza_juridica',
         'regime_tributario',
         'numero',
+        'password',
+        'last_login_at',
     ];
+
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    protected $casts = [
+        'last_login_at' => 'datetime', // Converte automaticamente em Carbon
+    ];
+    
 
     /**
      * Get the empresa that owns the tomador de servico.

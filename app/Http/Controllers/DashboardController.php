@@ -16,4 +16,9 @@ class DashboardController extends Controller
 
         return view('empresas.dashboard.dashboard');
     }
+
+    public function tomadorDashboard(){
+
+        return view('tomadores.dashboard.dashboard');
+    }
 }

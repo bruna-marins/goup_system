@@ -35,6 +35,12 @@ class LoginController extends Controller
             return redirect()->route('holdings.dashboard.dashboard');
         }
 
+        // Terceira tentativa: tentar autenticar o usuário da tabela 'tomadores_servicos'
+        if (Auth::guard('tomador')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)) {
+            // Se o login for bem-sucedido, redireciona para o dashboard da holding
+            return redirect()->route('tomadores.dashboard.dashboard');
+        }
+
         // Se ambas as tentativas falharem, redireciona de volta com erro
         return redirect()->back()->withInput($request->only('email', 'remember'))
             ->withErrors(['email' => 'As credenciais fornecidas não correspondem aos nossos registros.']);
@@ -48,7 +54,9 @@ class LoginController extends Controller
             Auth::guard('web')->logout();
         } elseif (Auth::guard('holding')->check()) {
             Auth::guard('holding')->logout();
-        }
+        } elseif (Auth::guard('tomador')->check()) {
+            Auth::guard('tomador')->logout();
+        } 
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();

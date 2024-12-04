@@ -15,13 +15,25 @@ use App\Models\HoldingUser;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
+
+// Rotas Públicas
+
+// Contratação plano para tomadores
+Route::get('/tomadores/planos-contratacao', [ClienteController::class, 'planosInicial'])->name('tomadores.planos.planosInicial');
+Route::get('/tomadores/contratacao', [ClienteController::class, 'contratacaoInicial'])->name('tomadores.planos.contratacaoInicial');
+Route::get('/tomadores/contratacao-abertura', [ClienteController::class, 'aberturaEmpresa'])->name('tomadores.planos.aberturaEmpresa');
+Route::post('/tomadores/contratacao-abertura-store', [ClienteController::class, 'storeAbertura'])->name('tomadores.planos.storeAbertura');
+Route::get('/tomadores/contratacao-troca-contador', [ClienteController::class, 'trocaContador'])->name('tomadores.planos.trocaContador');
+Route::post('/tomadores/contratacao-troca-store', [ClienteController::class, 'storeTroca'])->name('tomadores.planos.storeTroca');
+
+
 // Login
 Route::get('/', [LoginController::class, 'index'])->name('login.index');
 Route::post('/login', [LoginController::class, 'loginProcess'])->name('login.process');
 Route::get('/logout', [LoginController::class, 'destroy'])->name('login.destroy');
 
 
-Route::group(['middleware' => 'auth:web,holding'], function () {
+Route::group(['middleware' => 'auth:web,holding,tomador'], function () {
 
 
     // Rotas paras as Holdings
@@ -51,15 +63,15 @@ Route::group(['middleware' => 'auth:web,holding'], function () {
     Route::put('/holdings/update-usuario-password/{usuario}', [HoldingUserController::class, 'updatePasswordHolding'])->name('holdings.usuario.update-password');
     Route::delete('/holdings/destroy-usuario/{usuario}', [HoldingUserController::class, 'destroyHolding'])->name('holdings.usuario.destroy');
 
-    // Cliente Empresas
-    Route::get('/holdings/index-cliente-empresa', [ClienteController::class, 'indexEmpresa'])->name('holdings.clientes.index');
-    Route::get('/holdings/show-cliente-empresa/{cliente}', [ClienteController::class, 'showEmpresa'])->name('holdings.clientes.show');
-    Route::get('/holdings/create-cliente-empresa', [ClienteController::class, 'createEmpresa'])->name('holdings.clientes.create');
-    Route::post('/holdings/store-cliente-empresa', [ClienteController::class, 'storeEmpresa'])->name('holdings.clientes.store');
-    Route::get('/holdings/edit-cliente-empresa/{cliente}', [ClienteController::class, 'editEmpresa'])->name('holdings.clientes.edit');
-    Route::put('/holdings/update-cliente-empresa/{cliente}', [ClienteController::class, 'updateEmpresa'])->name('holdings.clientes.update');
-    Route::delete('/holdings/destroy-cliente-empresa/{cliente}', [ClienteController::class, 'destroyEmpresa'])->name('holdings.clientes.destroy');
-    Route::get('/holdings/show-colaboradores-empresa/{cliente}', [ClienteController::class, 'colaboradoresEmpresa'])->name('holdings.clientes.colaboradores');
+    // Empresas
+    Route::get('/holdings/index-empresa-empresa', [EmpresaController::class, 'indexEmpresa'])->name('holdings.empresas.index');
+    Route::get('/holdings/show-empresa-empresa/{empresa}', [EmpresaController::class, 'showEmpresa'])->name('holdings.empresas.show');
+    Route::get('/holdings/create-empresa-empresa', [EmpresaController::class, 'createEmpresa'])->name('holdings.empresas.create');
+    Route::post('/holdings/store-empresa-empresa', [EmpresaController::class, 'storeEmpresa'])->name('holdings.empresas.store');
+    Route::get('/holdings/edit-empresa-empresa/{empresa}', [EmpresaController::class, 'editEmpresa'])->name('holdings.empresas.edit');
+    Route::put('/holdings/update-empresa-empresa/{empresa}', [EmpresaController::class, 'updateEmpresa'])->name('holdings.empresas.update');
+    Route::delete('/holdings/destroy-empresa-empresa/{empresa}', [EmpresaController::class, 'destroyEmpresa'])->name('holdings.empresas.destroy');
+    Route::get('/holdings/show-colaboradores-empresa/{empresa}', [EmpresaController::class, 'colaboradoresEmpresa'])->name('holdings.empresas.colaboradores');
 
     // Perfil
     Route::get('/holdings/show-profile', [ProfileController::class, 'showHolding'])->name('holdings.profile.show');
@@ -123,5 +135,29 @@ Route::group(['middleware' => 'auth:web,holding'], function () {
     Route::get('/empresas/edit-tomador-servico/{tomadorservico}', [TomadorServicoController::class, 'edit'])->name('empresas.tomador.edit');
     Route::put('/empresas/update-tomador-servico/{tomadorservico}', [TomadorServicoController::class, 'update'])->name('empresas.tomador.update');
     Route::delete('/empresas/destroy-tomador-servico/{tomadorservico}', [TomadorServicoController::class, 'destroy'])->name('empresas.tomador.destroy');
+
+
+
+    // Rotas para os Tomadores de Serviço
+
+    // Dashboard
+    Route::get('/tomadores/dashboard', [DashboardController::class, 'tomadorDashboard'])->name('tomadores.dashboard.dashboard');
+
+    // Clientes
+    Route::get('/holdings/index-clientes', [ClienteController::class, 'indexCliente'])->name('tomadores.clientes.index');
+    Route::get('/tomadores/show-clientes/{cliente}', [ClienteController::class, 'showCliente'])->name('tomadores.clientes.show');
+    Route::get('/tomadores/create-clientes-cfp', [ClienteController::class, 'createClienteCpf'])->name('tomadores.clientes.createCpf');
+    Route::post('/tomadores/store-clientes-cpf', [ClienteController::class, 'storeClienteCpf'])->name('tomadores.clientes.storeCpf');
+    Route::get('/tomadores/edit-clientes-cpf/{cliente}', [ClienteController::class, 'editClienteCpf'])->name('tomadores.clientes.editCpf');
+    Route::put('/tomadores/update-clientes-cpf/{cliente}', [ClienteController::class, 'updateClienteCpf'])->name('tomadores.clientes.updateCpf');
+    Route::get('/tomadores/create-clientes-cnpj', [ClienteController::class, 'createClienteCnpj'])->name('tomadores.clientes.createCnpj');
+    Route::post('/tomadores/store-clientes-cnpj', [ClienteController::class, 'storeClienteCnpj'])->name('tomadores.clientes.storeCnpj');
+    Route::get('/tomadores/edit-clientes-cnpj/{cliente}', [ClienteController::class, 'editClienteCnpj'])->name('tomadores.clientes.editCnpj');
+    Route::put('/tomadores/update-clientes-cnpj/{cliente}', [ClienteController::class, 'updateClienteCnpj'])->name('tomadores.clientes.updateCnpj');
+    Route::delete('/tomadores/destroy-clientes/{cliente}', [ClienteController::class, 'destroyCliente'])->name('tomadores.clientes.destroy');
+    
+    // Planos
+    Route::get('/tomadores/planos', [ClienteController::class, 'planos'])->name('tomadores.planos.index');
+    
 
 });

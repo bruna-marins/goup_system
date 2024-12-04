@@ -9,7 +9,7 @@
                     <div class="col-12">
                         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center py-2">
                             <h1 class="card-title mb-2 mb-md-0">Clientes</h1>
-                            <a href="{{ route('holdings.clientes.create') }}"
+                            <a href="{{ route('holdings.empresas.create') }}"
                                 class="btn btn-inverse-info btn-sm"title="Cadastrar Nova Holding">
                                 <i class="fa-solid fa-plus btn-icon-prepend"></i>
                                 Novo Clinte
@@ -44,12 +44,12 @@
                                             <td>{{ $empresa->telefone }}</td>
                                             <td>
                                                 <div class="d-flex align-items-center">
-                                                    <a href="{{ route('holdings.clientes.edit', $empresa->id) }}"
+                                                    <a href="{{ route('holdings.empresas.edit', $empresa->id) }}"
                                                         class="btn btn-inverse-info btn-sm btn-icon-text me-3"
                                                         title="Editar clientes">
                                                         <i class="fa-solid fa-edit btn-icon-append"></i>
                                                     </a>
-                                                    <a href="{{ route('holdings.clientes.show', $empresa->id) }}"
+                                                    <a href="{{ route('holdings.empresas.show', $empresa->id) }}"
                                                         class="btn btn-inverse-info btn-sm btn-icon-text  me-3"
                                                         title="Detalhes">
                                                         <i class="fa-regular fa-eye"></i>

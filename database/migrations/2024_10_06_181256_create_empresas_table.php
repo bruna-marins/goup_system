@@ -35,10 +35,6 @@ return new class extends Migration
             $table->string('responsavel_contabil');
             $table->string('codigo_tributacao');
             $table->string('aliquota_fiscais');
-            $table->string('socio');
-            $table->string('cpf');
-            $table->string('participacao_societaria');
-            $table->string('cargo');
             $table->timestamps(); // Timestamps (created_at, updated_at)
         });
     }

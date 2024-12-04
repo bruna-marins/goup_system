@@ -20,7 +20,7 @@
                             <x-alert />
                             
                             <!--Inserir o COnteudo da página -->
-                            <form class="forms-sample" action="{{ route('holdings.clientes.store') }}" method="POST">
+                            <form class="forms-sample" action="{{ route('holdings.empresas.store') }}" method="POST">
                                 @csrf
                                 @method('POST')
                                 <div class="row">

@@ -47,6 +47,12 @@ return [
             'driver' => 'session',
             'provider' => 'holding_users',
         ],
+
+        // Guard para tomadores
+        'tomador' => [
+            'driver' => 'session',
+            'provider' => 'tomadores',
+        ],
     ],
 
     /*
@@ -76,6 +82,12 @@ return [
         'holding_users' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\HoldingUser::class),
+        ],
+
+        // Provider para tomadores
+        'tomadores' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL', App\Models\TomadorServico::class),
         ],
     ],
 
