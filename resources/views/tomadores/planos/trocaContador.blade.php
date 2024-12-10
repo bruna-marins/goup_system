@@ -6,7 +6,11 @@
     <h1 class="mb-4">Troca de Contador</h1>
 
     <!-- Formulário para Troca de Contador -->
-    <form>
+    <form action="{{ route('tomadores.planos.storeTroca') }}" method="POST" enctype="multipart/form-data">
+
+        @csrf
+        @method('POST')
+
         <div class="mb-3">
             <label for="razao_social" class="form-label">Razão Social</label>
             <input type="text" class="form-control" id="razao_social" name="razao_social" required>
@@ -65,7 +69,7 @@
 
         <div class="mb-3">
             <label for="documentos_empresa" class="form-label">Upload de Documentos</label>
-            <input type="file" class="form-control" id="documentos_empresa" name="documentos_empresa[]"
+            <input type="file" class="form-control" id="documentos_empresa" name="documentos_empresa"
                 multiple>
         </div>
 

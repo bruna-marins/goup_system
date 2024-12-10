@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Socio;
+use App\Models\TomadoresAbertura;
 use App\Models\TomadorServico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -105,4 +107,132 @@ class TomadorServicoController extends Controller
         return view('empresas.tomador.edit', compact('cliente'));
     }
 
+    public function planos()
+    {
+
+        return view('tomadores.planos.index');
+    }
+
+    public function planosInicial()
+    {
+
+        return view('tomadores.planos.planosInicial');
+    }
+
+    public function contratacaoInicial()
+    {
+
+        return view('tomadores.planos.contratacaoInicial');
+    }
+
+    public function aberturaEmpresa()
+    {
+
+        return view('tomadores.planos.aberturaEmpresa');
+    }
+
+    public function storeAbertura(Request $request)
+    {
+
+        //dd($request->all());
+
+        $request->validate([
+            'razao_social' => 'required|string|max:255',
+            'razao_social2' => 'required|string|max:255',
+            'razao_social3' => 'required|string|max:255',
+            'nome_fantasia' => 'required|string|max:255',
+            'email' => 'required|string|email',
+            'cep' => 'required',
+            'logradouro' => 'required',
+            'numero' => 'required',
+            'bairro' => 'required',
+            'cidade' => 'required',
+            'estado' => 'required',
+            'complemento' => 'nullable',
+
+            'socios.*.nome' => 'required|string|max:255',
+            'socios.*.identidade' => 'required|string|max:20',
+            'socios.*.cpf' => 'required|string|max:14',
+            'socios.*.estado_civil' => 'required|string|max:50',
+            'socios.*.profissao' => 'required|string|max:100',
+            'socios.*.cep' => 'required|string|max:10',
+            'socios.*.estado' => 'required|string|max:2',
+            'socios.*.cidade' => 'required|string|max:100',
+            'socios.*.bairro' => 'required|string|max:100',
+            'socios.*.logradouro' => 'required|string|max:255',
+            'socios.*.numero' => 'required|string|max:10',
+            'socios.*.complemento' => 'nullable|string|max:255',
+            'socios.*.documentos' => 'nullable|array',
+            'socios.*.documentos.*' => 'nullable|file|mimes:jpg,jpeg,png,pdf,txt',
+        ], [
+            // Mensagens de erro
+            'razao_social.required' => 'O campo Razão social 1 é obrigatório.',
+            'razao_social2.required' => 'O campo Razão social 2 é obrigatório.',
+            'razao_social3.required' => 'O campo Razão social 3 é obrigatório.',
+            'nome_fantasia.required' => 'O campo Nome Fantasia é obrigatório.',
+            'cep.required' => 'O campo CEP é obrigatório.',
+            'logradouro.required' => 'O campo Logradouro é obrigatório.',
+            'numero.required' => 'O campo Número é obrigatório.',
+            'bairro.required' => 'O campo Bairro é obrigatório.',
+            'cidade.required' => 'O campo Cidade é obrigatório.',
+            'estado.required' => 'O campo Estado é obrigatório.',
+        ]);
+
+        // Criar o tomador de serviço principal
+        $tomador = TomadorServico::create(array_merge(
+            $request->only([
+                'razao_social',
+                'razao_social2',
+                'razao_social3',
+                'nome_fantasia',
+                'email',
+                'cep',
+                'estado',
+                'cidade',
+                'bairro',
+                'logradouro',
+                'numero',
+                'complemento',
+            ]),
+            ['empresa_id' => 1, 'password' => Hash::make('123456a', ['rounds' => 12])]
+        ));
+
+        // Percorrer os sócios e salvar no banco
+        foreach ($request->socios as $socio) {
+            $novoSocio = $tomador->socios()->create($socio); // Associa o sócio ao tomador
+        }
+
+        // Processar documentos do sócio
+        if (isset($socio['documentos']) && is_array($socio['documentos'])) {
+            foreach ($socio['documentos'] as $documento) {
+                if ($documento->isValid()) {
+                    // Fazer upload do arquivo
+                    $caminho = $documento->store('documentos_socios', 'public'); // Salva em `storage/app/public/documentos_socios`
+
+                    // Salvar caminho na tabela `socios_documentos`
+                    $novoSocio->documentos()->create([
+                        'caminho' => $caminho,
+                    ]);
+                }
+            }
+        }
+
+        return redirect()->back()->with('success', 'Cadastro realizado com sucesso!');
+    }
+
+    public function trocaContador()
+    {
+
+
+        return view('tomadores.planos.trocaContador');
+    }
+
+    public function storeTroca(Request $request)
+    {
+
+        dd($request);
+
+       
+        return;
+    }
 }

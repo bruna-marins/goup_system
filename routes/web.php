@@ -12,6 +12,7 @@ use App\Http\Controllers\TarefaController;
 use App\Http\Controllers\TomadorServicoController;
 use App\Http\Controllers\UsuarioController;
 use App\Models\HoldingUser;
+use App\Models\TomadorServico;
 use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
@@ -19,12 +20,12 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 // Rotas Públicas
 
 // Contratação plano para tomadores
-Route::get('/tomadores/planos-contratacao', [ClienteController::class, 'planosInicial'])->name('tomadores.planos.planosInicial');
-Route::get('/tomadores/contratacao', [ClienteController::class, 'contratacaoInicial'])->name('tomadores.planos.contratacaoInicial');
-Route::get('/tomadores/contratacao-abertura', [ClienteController::class, 'aberturaEmpresa'])->name('tomadores.planos.aberturaEmpresa');
-Route::post('/tomadores/contratacao-abertura-store', [ClienteController::class, 'storeAbertura'])->name('tomadores.planos.storeAbertura');
-Route::get('/tomadores/contratacao-troca-contador', [ClienteController::class, 'trocaContador'])->name('tomadores.planos.trocaContador');
-Route::post('/tomadores/contratacao-troca-store', [ClienteController::class, 'storeTroca'])->name('tomadores.planos.storeTroca');
+Route::get('/tomadores/planos-contratacao', [TomadorServicoController::class, 'planosInicial'])->name('tomadores.planos.planosInicial');
+Route::get('/tomadores/contratacao', [TomadorServicoController::class, 'contratacaoInicial'])->name('tomadores.planos.contratacaoInicial');
+Route::get('/tomadores/contratacao-abertura', [TomadorServicoController::class, 'aberturaEmpresa'])->name('tomadores.planos.aberturaEmpresa');
+Route::post('/tomadores/contratacao-abertura-store', [TomadorServicoController::class, 'storeAbertura'])->name('tomadores.planos.storeAbertura');
+Route::get('/tomadores/contratacao-troca-contador', [TomadorServicoController::class, 'trocaContador'])->name('tomadores.planos.trocaContador');
+Route::post('/tomadores/contratacao-troca-store', [TomadorServicoController::class, 'storeTroca'])->name('tomadores.planos.storeTroca');
 
 
 // Login
@@ -157,7 +158,7 @@ Route::group(['middleware' => 'auth:web,holding,tomador'], function () {
     Route::delete('/tomadores/destroy-clientes/{cliente}', [ClienteController::class, 'destroyCliente'])->name('tomadores.clientes.destroy');
     
     // Planos
-    Route::get('/tomadores/planos', [ClienteController::class, 'planos'])->name('tomadores.planos.index');
+    Route::get('/tomadores/planos', [TomadorServicoController::class, 'planos'])->name('tomadores.planos.index');
     
 
 });

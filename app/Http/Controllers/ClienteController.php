@@ -56,43 +56,5 @@ class ClienteController extends Controller
         
     }
 
-    public function planos(){
-        
-        return view('tomadores.planos.index');
-    }
-
-    public function planosInicial(){
-
-        return view('tomadores.planos.planosInicial');
-    }
-
-    public function contratacaoInicial(){
-
-        return view('tomadores.planos.contratacaoInicial');
-    }
-
-    public function aberturaEmpresa(){
-
-        return view('tomadores.planos.aberturaEmpresa');
-    }
-
-    public function storeAbertura(Request $request){
-
-        dd($request);
-
-        return;
-    }
-
-    public function trocaContador(){
-
-
-        return view('tomadores.planos.trocaContador');
-    }
-
-    public function storeTroca(Request $request){
-
-        dd($request);
-
-        return;
-    }
+    
 }

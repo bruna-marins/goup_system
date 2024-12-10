@@ -14,14 +14,13 @@ return new class extends Migration
         Schema::create('tomadores_servicos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('empresa_id');
-            $table->string('nome');
             $table->string('nome_fantasia');
             $table->string('razao_social')->nullable();
             $table->string('cnpj')->nullable();
-            $table->string('email');
-            $table->string('telefone');
+            $table->string('email')->nullable();;
+            $table->string('telefone')->nullable();;
             $table->string('site')->nullable();
-            $table->string('numero');
+            $table->string('numero')->nullable();;
             $table->string('logradouro');
             $table->string('bairro');
             $table->string('cidade');

@@ -14,12 +14,19 @@ return new class extends Migration
         Schema::create('socios', function (Blueprint $table) {
             $table->id(); // Chave primária
             $table->string('nome');
-            $table->string('sobrenome');
+            $table->string('identidade');
+            $table->string('estado_civil');
+            $table->string('profissao');
             $table->string('cpf')->unique();
             $table->string('email')->unique();
             $table->string('telefone')->nullable();
-            $table->decimal('participacao', 5, 2); // Percentual de participação
-            $table->string('cargo')->nullable(); // Cargo do sócio
+            $table->string('numero');
+            $table->string('logradouro');
+            $table->string('bairro');
+            $table->string('cidade');
+            $table->string('estado');
+            $table->string('cep');
+            $table->string('complemento')->nullable();
             $table->timestamps();
         });
 
@@ -31,14 +38,14 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('socio_id')
-                  ->references('id')
-                  ->on('socios')
-                  ->onDelete('cascade');
+                ->references('id')
+                ->on('socios')
+                ->onDelete('cascade');
 
             $table->foreign('tomador_servico_id')
-                  ->references('id')
-                  ->on('tomadores_servicos')
-                  ->onDelete('cascade');
+                ->references('id')
+                ->on('tomadores_servicos')
+                ->onDelete('cascade');
         });
     }
 

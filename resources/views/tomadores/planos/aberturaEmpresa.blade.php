@@ -4,14 +4,16 @@
     <div class="container mt-5">
         <h1 class="mb-4">Abertura de Empresa</h1>
 
+        <x-alert />
+
         <!-- Formulário de Abertura de Empresa -->
-        <form action="{{ route('tomadores.planos.storeAbertura') }}" method="POST">
+        <form action="{{ route('tomadores.planos.storeAbertura') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('POST')
 
             <div class="mb-3">
-                <label for="razao_social1" class="form-label">Razão Social 1</label>
-                <input type="text" class="form-control" id="razao_social1" name="razao_social1" required>
+                <label for="razao_social" class="form-label">Razão Social 1</label>
+                <input type="text" class="form-control" id="razao_social" name="razao_social" required>
             </div>
             <div class="mb-3">
                 <label for="razao_social2" class="form-label">Razão Social 2</label>
@@ -24,6 +26,10 @@
             <div class="mb-3">
                 <label for="nome_fantasia" class="form-label">Nome Fantasia</label>
                 <input type="text" class="form-control" id="nome_fantasia" name="nome_fantasia" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">E-Mail</label>
+                <input type="text" class="form-control" id="email" name="email" required>
             </div>
 
             <h5 class="mt-4">Endereço</h5>
@@ -115,6 +121,14 @@
                     <div class="mb-3">
                         <label for="profissao-${socioCount}" class="form-label">Profissão</label>
                         <input type="text" class="form-control" id="profissao-${socioCount}" name="socios[${socioCount}][profissao]" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email-${socioCount}" class="form-label">Telefone</label>
+                        <input type="text" class="form-control" id="email-${socioCount}" name="socios[${socioCount}][email]" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefone-${socioCount}" class="form-label">E-mail</label>
+                        <input type="text" class="form-control" id="telefone-${socioCount}" name="socios[${socioCount}][telefone]" required>
                     </div>
                     <h6 class="mt-3">Endereço</h6>
                     <div class="mb-3">

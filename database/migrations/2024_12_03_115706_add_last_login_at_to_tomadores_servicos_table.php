@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::table('tomadores_servicos', function (Blueprint $table) {
             $table->timestamp('last_login_at')->nullable()->after('password');
+            $table->timestamp('inscricao_estadual')->nullable();
+
         });
     }
 
@@ -23,6 +25,7 @@ return new class extends Migration
     {
         Schema::table('tomadores_servicos', function (Blueprint $table) {
             $table->dropColumn('last_login_at');
+            $table->dropColumn('inscricao_estadual');
         });
     }
 };

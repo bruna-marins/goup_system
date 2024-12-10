@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('tomadores_servicos', function (Blueprint $table) {
-            $table->string('codigo_tributacao');
+            $table->string('codigo_tributacao')->nullable();
+            $table->string('razao_social2')->nullable();
+            $table->string('razao_social3')->nullable();
         });
     }
 
@@ -23,6 +25,8 @@ return new class extends Migration
     {
         Schema::table('tomadores_servicos', function (Blueprint $table) {
             $table->dropColumn('codigo_tributacao');
+            $table->dropColumn('razao_social2');
+            $table->dropColumn('razao_social3');
         });
     }
 };

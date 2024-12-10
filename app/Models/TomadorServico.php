@@ -26,7 +26,9 @@ class TomadorServico extends Authenticatable
     protected $fillable = [
         'empresa_id',
         'nome',
-        'sobrenome',
+        'razao_social',
+        'razao_social2',
+        'razao_social3',
         'cnpj',
         'telefone',
         'site',
