@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt_br">
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GoUp-System</title>
-    <!-- base:css -->
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
 
     <link href="{{ asset('css/style.css.map') }}" rel="stylesheet">
     <link href="{{ asset('css/vendor.bundle.base.css') }}" rel="stylesheet">
@@ -24,7 +23,10 @@
     <!-- endinject -->
     <link href="{{ asset('assets/images/favicon.ico') }}" rel="stylesheet">
 
+</head>
+
     <style>
+         /* apagar */
         .position-relative {
             position: relative; /* Define o pai como relativo */
         }
@@ -41,118 +43,221 @@
         .form-control {
             padding-right: 2.5rem; /* Cria espaço suficiente para o ícone à direita */
         }
+        /* apagar */
+
+ /* Reset básico */
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Container principal */
+.login-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Lateral da imagem */
+.image-section {
+    flex: 1;
+    background: #0d454c url('https://via.placeholder.com/800x600') no-repeat center center/cover;
+}
+
+/* Lateral do formulário */
+.form-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #eef0f4;
+    padding: 20px;
+}
+
+/* Card de login */
+.login-card {
+    background: #fff;
+    padding: 40px 30px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.login-card h2 {
+    margin-bottom: 20px;
+    color: #0d454c;
+}
+
+/* Formulário */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #0d454c;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Grupo de senha com ícone */
+.password-group .password-wrapper {
+    position: relative;
+}
+
+.password-group .toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #aaa;
+    font-size: 16px;
+}
+
+/* Checkbox de permanecer logado */
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: #0d454c;
+}
+
+.remember-me input {
+    width: auto;
+}
+
+/* Botão de login */
+.login-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #249f82;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-btn:hover {
+    background-color: #1a7b68;
+}
+
+/* Link Esqueceu a Senha */
+.forgot-password {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #249f82;
+    text-decoration: none;
+    text-align: center;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .login-container {
+        flex-direction: column;
+    }
+
+    .image-section {
+        height: 200px;
+        flex: 0;
+    }
+
+    .form-section {
+        flex: 1;
+        padding: 10px;
+    }
+}
+
+
     </style>
 
-</head>
 
 <body>
-    <div class="container-scroller">
-        <div class="container-fluid page-body-wrapper full-page-wrapper">
-            <div class="content-wrapper d-flex align-items-center auth px-0">
-                <div class="row w-100 mx-0">
-                    <div class="col-lg-4 mx-auto">
-                        <div class="auth-form-light text-start py-5 px-4 px-sm-5">
-                            <div class="brand-logo text-center">
-                                <img src="{{ asset('imagens/logo2.png') }}" alt="Logo da Empresa">
-                            </div>
+    <div class="login-container">
+        <!-- Lateral com a imagem -->
+        <div class="image-section"></div>
 
-                            <x-alert />
+        <!-- Lateral com o card de login -->
+        <div class="form-section">
+            <div class="login-card">
+                <div class="brand-logo text-center">
+                    <img src="" alt="Logo da Empresa">
+                </div>
 
-                            <form action="{{ route('login.process') }}" method="POST" class="pt-3">
-                                @csrf
-                                @method('POST')
+                <x-alert />
+                <h2>Bem-vindo</h2>
 
-                                <div class="form-group">
-                                    <input type="email" class="form-control form-control-lg" id="email"
-                                        name="email" placeholder="E-mail" value="{{ old('email') }}">
-                                </div>
-                                <div class="form-group position-relative">
-                                    <input type="password" class="form-control form-control-lg pr-5" id="password"
-                                        name="password" placeholder="Senha">
-                                    <i class="fas fa-eye position-absolute toggle-password" id="togglePassword"
-                                        onclick="togglePassword()"></i>
-                                </div>
-                                <div class="mt-3 d-grid gap-2">
-                                    <button class="btn btn-block btn-secondary btn-lg fw-medium auth-form-btn"
-                                        type="submit">Entrar</button>
-                                </div>
-                                <div class="my-2 d-flex justify-content-between align-items-center">
-                                    <div class="form-check">
-                                        <label class="form-check-label text-muted">
-                                            <input type="checkbox" class="form-check-input">
-                                            Manter logado
-                                        </label>
-                                    </div>
-                                    <a href="#" class="auth-link text-black">Esqueceu a Senha?</a>
-                                </div>
-                            </form>
+                <form action="{{ route('login.process') }}" method="POST" class="pt-3">
+                    @csrf
+                    @method('POST')
+                
+                    <!-- Campo de Email -->
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="E-mail" value="{{ old('email') }}">
+                    </div>
+                    
+                    <!-- Campo de Senha com ícone de visualização -->
+                    <div class="form-group password-group">
+                        <label for="password">Senha</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+                            <span class="toggle-password" onclick="togglePasswordVisibility()">👁️</span>
                         </div>
                     </div>
-                </div>
+
+               
+                    <!-- Checkbox de Permanecer Logado -->
+                    <div class="form-group remember-me">
+                        <input type="checkbox" id="remember-me">
+                        <label for="remember-me">Permanecer logado</label>
+                    </div>
+                    
+                    <!-- Botão de Login e link Esqueceu a Senha -->
+                    <div class="form-actions">
+                        <button type="submit" class="login-btn">Entrar</button>
+                        <a href="#" class="forgot-password">Esqueceu sua senha?</a>
+                    </div>
+                </form>
             </div>
-            <!-- content-wrapper ends -->
         </div>
-        <!-- page-body-wrapper ends -->
     </div>
-    <!-- container-scroller -->
-    <!-- base:js -->
-    <script src="../../assets/vendors/js/vendor.bundle.base.js"></script>
-    <!-- endinject -->
-    <!-- inject:js -->
-    <script src="../../assets/js/off-canvas.js"></script>
-    <script src="../../assets/js/hoverable-collapse.js"></script>
-    <script src="../../assets/js/template.js"></script>
-    <script src="../../assets/js/settings.js"></script>
-    <script src="../../assets/js/todolist.js"></script>
-    <!-- endinject -->
-
-    <!-- base:js -->
-    <script src="{{ asset('js/vendor.bundle.base.js') }}"></script>
-    <!-- endinject -->
-
-    <!-- inject:js -->
-    <script src="{{ asset('js/off-canvas.js') }}"></script>
-    <script src="{{ asset('js/hoverable-collapse.js') }}"></script>
-    <script src="{{ asset('js/template.js') }}"></script>
-    <script src="{{ asset('js/settings.js') }}"></script>
-    <script src="{{ asset('js/todolist.js') }}"></script>
-    <!-- endinject -->
-
-    <!-- Plugin js for this page-->
-    <script src="{{ asset('js/chart.js') }}"></script>
-    <script src="{{ asset('js/chartist.js') }}"></script>
-    <script src="{{ asset('js/jquery.cookie.js') }}"></script>
-
-    <script src="{{ asset('js/all.min.js') }}"></script>
-
-    <script src="{{ asset('js/typeahead.bundle.min.js') }}"></script>
-    <!-- End plugin js for this page-->
-
-    <!-- Custom js for this page-->
-    <script src="{{ asset('js/file-upload.js') }}"></script>
-    <script src="{{ asset('js/typeahead.js') }}"></script>
-    <script src="{{ asset('js/select2.js') }}"></script>
-
-    <script src="{{ asset('js/dashboard.js') }}"></script>
-    <!-- End custom js for this page-->
-
-    <script>
-        function togglePassword() {
-            const passwordInput = document.getElementById('password');
-            const toggleIcon = document.getElementById('togglePassword');
-    
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                toggleIcon.classList.remove('fa-eye');
-                toggleIcon.classList.add('fa-eye-slash');
-            } else {
-                passwordInput.type = 'password';
-                toggleIcon.classList.remove('fa-eye-slash');
-                toggleIcon.classList.add('fa-eye');
-            }
-        }
-    </script>
-
 </body>
-
 </html>
+
+
+<script>
+    // Alternar visibilidade da senha
+function togglePasswordVisibility() {
+    const passwordInput = document.getElementById('password');
+    const passwordToggle = document.querySelector('.toggle-password');
+
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        passwordToggle.textContent = '🙈'; // Ícone para senha visível
+    } else {
+        passwordInput.type = 'password';
+        passwordToggle.textContent = '👁️'; // Ícone para senha oculta
+    }
+}
+</script>

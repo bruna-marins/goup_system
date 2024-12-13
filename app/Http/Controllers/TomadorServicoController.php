@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Documento;
 use App\Models\Socio;
 use App\Models\TomadoresAbertura;
 use App\Models\TomadorServico;
@@ -197,22 +198,25 @@ class TomadorServicoController extends Controller
             ['empresa_id' => 1, 'password' => Hash::make('123456a', ['rounds' => 12])]
         ));
 
-        // Percorrer os sócios e salvar no banco
-        foreach ($request->socios as $socio) {
-            $novoSocio = $tomador->socios()->create($socio); // Associa o sócio ao tomador
-        }
+        // Processar e salvar os sócios
+        if ($request->has('socios')) {
+            foreach ($request->socios as $socio) {
+                // Criar o sócio e associá-lo ao tomador
+                $novoSocio = $tomador->socios()->create($socio);
 
-        // Processar documentos do sócio
-        if (isset($socio['documentos']) && is_array($socio['documentos'])) {
-            foreach ($socio['documentos'] as $documento) {
-                if ($documento->isValid()) {
-                    // Fazer upload do arquivo
-                    $caminho = $documento->store('documentos_socios', 'public'); // Salva em `storage/app/public/documentos_socios`
+                // Processar os documentos do sócio, caso existam
+                if (isset($socio['documentos']) && is_array($socio['documentos'])) {
+                    foreach ($socio['documentos'] as $documento) {
+                        if ($documento->isValid()) {
+                            // Fazer upload do arquivo
+                            $caminho = $documento->store('documentos_socios', 'public'); // Salva no diretório "documentos_socios"
 
-                    // Salvar caminho na tabela `socios_documentos`
-                    $novoSocio->documentos()->create([
-                        'caminho' => $caminho,
-                    ]);
+                            // Salvar o documento na tabela "socios_documentos"
+                            $novoSocio->documentos()->create([
+                                'caminho' => $caminho,
+                            ]);
+                        }
+                    }
                 }
             }
         }
@@ -229,10 +233,99 @@ class TomadorServicoController extends Controller
 
     public function storeTroca(Request $request)
     {
+        // Validação dos campos
+        $request->validate([
+            'razao_social' => 'required|string|max:255',
+            'nome_fantasia' => 'required|string|max:255',
+            'cnpj' => 'required',
+            'inscricao_municipal' => 'required|string|max:255',
+            'inscricao_estadual' => 'required|string|max:255',
+            'email' => 'required|string|email',
+            'cep' => 'required',
+            'logradouro' => 'required',
+            'numero' => 'required',
+            'bairro' => 'required',
+            'cidade' => 'required',
+            'estado' => 'required',
+            'complemento' => 'nullable',
+            'documentos_empresa.*' => 'nullable|file|mimes:jpg,jpeg,png,pdf,txt',
 
-        dd($request);
+            'socios.*.nome' => 'required|string|max:255',
+            'socios.*.identidade' => 'required|string|max:20',
+            'socios.*.cpf' => 'required|string|max:14',
+            'socios.*.estado_civil' => 'required|string|max:50',
+            'socios.*.profissao' => 'required|string|max:100',
+            'socios.*.cep' => 'required|string|max:10',
+            'socios.*.estado' => 'required|string|max:2',
+            'socios.*.cidade' => 'required|string|max:100',
+            'socios.*.bairro' => 'required|string|max:100',
+            'socios.*.logradouro' => 'required|string|max:255',
+            'socios.*.numero' => 'required|string|max:10',
+            'socios.*.complemento' => 'nullable|string|max:255',
+            'socios.*.documentos.*' => 'nullable|file|mimes:jpg,jpeg,png,pdf,txt',
+        ]);
 
-       
-        return;
+        // Criar o tomador de serviço principal
+        $tomador = TomadorServico::create(array_merge(
+            $request->only([
+                'razao_social',
+                'cnpj',
+                'inscricao_municipal',
+                'inscricao_estadual',
+                'nome_fantasia',
+                'email',
+                'cep',
+                'estado',
+                'cidade',
+                'bairro',
+                'logradouro',
+                'numero',
+                'complemento',
+            ]),
+            ['empresa_id' => 1, 'password' => Hash::make('123456a', ['rounds' => 12])]
+        ));
+
+
+        // Upload dos documentos da empresa
+        if ($request->hasFile('documentos_empresa')) {
+            
+            foreach ($request->file('documentos_empresa') as $file) {
+                if ($file->isValid()) {
+                    // Salva no diretório "documentos_empresa" no disco "public"
+                    $path = $file->store('documentos_empresa', 'public');
+                    // Salva o documento na tabela "documentos"
+                    Documento::create([
+                        'tomador_servico_id' => $tomador->id,
+                        'path' => $path, // Caminho do arquivo armazenado
+                    ]);
+                }
+            }
+        }
+
+        // Processar e salvar os sócios
+        if ($request->has('socios')) {
+            foreach ($request->socios as $socio) {
+                // Criar o sócio e associá-lo ao tomador
+                $novoSocio = $tomador->socios()->create($socio);
+
+                // Processar os documentos do sócio, caso existam
+                if (isset($socio['documentos']) && is_array($socio['documentos'])) {
+                    foreach ($socio['documentos'] as $documento) {
+                        if ($documento->isValid()) {
+                            // Fazer upload do arquivo
+                            $caminho = $documento->store('documentos_socios', 'public'); // Salva no diretório "documentos_socios"
+
+                            // Salvar o documento na tabela "socios_documentos"
+                            $novoSocio->documentos()->create([
+                                'caminho' => $caminho,
+                            ]);
+                        }
+                    }
+                }
+            }
+        }
+
+        // Retornar sucesso
+        return redirect()->back()->with('success', 'Cadastro realizado com sucesso!');
     }
 }

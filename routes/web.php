@@ -7,6 +7,7 @@ use App\Http\Controllers\EmpresaPerfilController;
 use App\Http\Controllers\HoldingController;
 use App\Http\Controllers\HoldingUserController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PagSeguroController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TarefaController;
 use App\Http\Controllers\TomadorServicoController;
