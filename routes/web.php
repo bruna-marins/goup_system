@@ -146,8 +146,9 @@ Route::group(['middleware' => 'auth:web,holding,tomador'], function () {
     Route::get('/tomadores/dashboard', [DashboardController::class, 'tomadorDashboard'])->name('tomadores.dashboard.dashboard');
 
     // Clientes
-    Route::get('/holdings/index-clientes', [ClienteController::class, 'indexCliente'])->name('tomadores.clientes.index');
-    Route::get('/tomadores/show-clientes/{cliente}', [ClienteController::class, 'showCliente'])->name('tomadores.clientes.show');
+    Route::get('/tomadores/index-clientes', [ClienteController::class, 'indexCliente'])->name('tomadores.clientes.index');
+    Route::get('/tomadores/show-clientes-cpf/{cliente}', [ClienteController::class, 'showClienteCpf'])->name('tomadores.clientes.showCpf');
+    Route::get('/tomadores/show-clientes-cnpj/{cliente}', [ClienteController::class, 'showClienteCnpj'])->name('tomadores.clientes.showCnpj');
     Route::get('/tomadores/create-clientes-cfp', [ClienteController::class, 'createClienteCpf'])->name('tomadores.clientes.createCpf');
     Route::post('/tomadores/store-clientes-cpf', [ClienteController::class, 'storeClienteCpf'])->name('tomadores.clientes.storeCpf');
     Route::get('/tomadores/edit-clientes-cpf/{cliente}', [ClienteController::class, 'editClienteCpf'])->name('tomadores.clientes.editCpf');

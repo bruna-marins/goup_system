@@ -13,9 +13,12 @@ class Cliente extends Model
         'nome',
         'nome_fantasia',
         'razao_social',
+        'email',
+        'telefone',
         'cnpj',
         'cpf',
         'sobrenome',
+        'site',
         'tomador_servico_id',
     ];
 

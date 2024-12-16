@@ -13,12 +13,27 @@ use Illuminate\Support\Facades\Hash;
 
 class TomadorServicoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
 
-        $clientes = TomadorServico::all();
+        $query = TomadorServico::query();
+
+        // Filtro por situação, se fornecido
+        if ($request->filled('situacao')) {
+            $query->where('situacao', $request->situacao);
+        }
+
+        // Ordenar alfabeticamente por razão social
+        $clientes = $query->orderBy('razao_social', 'asc')->paginate(10);
 
         return view('empresas.tomador.index', compact('clientes'));
+    }
+
+    public function show($tomadorservico)
+    {
+        $tomador = TomadorServico::with('socios', 'documentos')->findOrFail($tomadorservico);
+
+        return view('empresas.tomador.show', compact('tomador'));
     }
 
     public function create()
@@ -288,7 +303,7 @@ class TomadorServicoController extends Controller
 
         // Upload dos documentos da empresa
         if ($request->hasFile('documentos_empresa')) {
-            
+
             foreach ($request->file('documentos_empresa') as $file) {
                 if ($file->isValid()) {
                     // Salva no diretório "documentos_empresa" no disco "public"

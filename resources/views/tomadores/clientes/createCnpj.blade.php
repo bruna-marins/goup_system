@@ -32,16 +32,9 @@
                                 <div class="row">
                                     <div class="col-md-5">
                                         <div class="form-group">
-                                            <label>Nome da Empresa</label>
+                                            <label>Nome Fanatasia</label>
                                             <input type="text" name="nome" id="nome" value="{{ old('nome') }}"
                                                 class="form-control">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <div class="form-group">
-                                            <label>Nome Fantasia</label>
-                                            <input type="text" name="nome_fantasia" id="nome_fantasia"
-                                                value="{{ old('nome_fantasia') }}" class="form-control">
                                         </div>
                                     </div>
                                     <div class="col-md-5">
